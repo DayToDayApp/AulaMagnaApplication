@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AulaMagnaApp</string>
+    <string name="app_name">Aula Magna</string>
+    <drawable name="toolbar_image">@drawable/logo_aulamagna</drawable>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
