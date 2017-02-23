@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="290dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/degree2"
+    android:id="@+id/cv"
+    android:focusable="true"
+    android:clickable="true"
+    card_view:cardCornerRadius="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/degree2"
+        android:orientation="vertical"
+        android:padding="16dp"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/card_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:layout_marginRight="16dp"
+            />
+
+        <TextView
+            android:id="@+id/card_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
+            android:gravity="center"
+            tools:text=" Trump anula la norma que permitía a los transexuales elegir baño"
+            android:textSize="15sp"
+            />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1.4"
+    >
+        <TextView
+            android:id="@+id/card_text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20.01.2017"
+            android:layout_below="@+id/card_text_title"
+
+
+            />
+
+        <TextView
+            android:id="@+id/card_text_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deporte"
+
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/card_text_title"/>
+
+    </RelativeLayout>
+
+        <TextView
+            android:id="@+id/card_text_text"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1.3"
+              android:layout_margin="10dp"
+          android:text="kpasjoicqiphcqpwdoqhwspichqpiwjòqwjpjqwojpichqpiwjocpqhjwcpijqpwocjqpiwhjcpqhwwoeqwejdiphqpcwhjqw" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
