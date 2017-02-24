@@ -15,8 +15,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-
-
         >
 
         <ImageView
@@ -33,6 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
+            android:textColor="@color/colorAccent"
             android:textSize="15sp"
             />
 <RelativeLayout
@@ -43,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20.01.2017"
-            android:layout_below="@+id/card_text_title"
 
 
             />
@@ -53,8 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Deporte"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/card_text_title"/>
+            android:layout_alignParentRight="true">
+
+        </TextView>
 
     </RelativeLayout>
 

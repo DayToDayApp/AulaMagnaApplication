@@ -2,4 +2,11 @@
     <string name="app_name">Aula Magna</string>
     <drawable name="toolbar_image">@drawable/logo_aulamagna</drawable>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_menu_principal">menu_principal</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_lateral_menu">lateral_menu</string>
 </resources>

@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    tools:showIn="@layout/activity_main"
     tools:openDrawer="start">
 
+<include>
     <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -23,17 +25,20 @@
             <ImageView
                 android:id="@+id/activity_main_toolbar_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:src="@drawable/logo_toolbar"
                 />
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
+    </include>
+
 
     <include
         layout="@layout/app_bar_lateral_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="20dp" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -43,6 +48,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_lateral_menu"
         app:menu="@menu/activity_lateral_menu_drawer" />
+
 
 </android.support.v4.widget.DrawerLayout>
 

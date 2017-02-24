@@ -2,10 +2,16 @@ package com.example.dancd.aulamagnaapp;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.dancd.aulamagnaapp.manager.Noticia;
 
@@ -14,7 +20,7 @@ import java.util.List;
 
 import static com.example.dancd.aulamagnaapp.R.id.toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private List<Noticia> noticias;
     private RecyclerView rv;
@@ -24,19 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-new Thread(new Runnable() {
-    @Override
-    public void run() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-                setSupportActionBar(toolbar);
-                SystemClock.sleep(500);
-            }
-        });
-    }
-}).start();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        SystemClock.sleep(500);
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
         rv = (RecyclerView) findViewById(R.id.rv);
@@ -44,14 +50,10 @@ new Thread(new Runnable() {
         LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                initializeData();
-                initializeAdapter();
-                SystemClock.sleep(500);
-            }
-        }).start();
+
+        initializeData();
+        initializeAdapter();
+
 
 
 
@@ -59,14 +61,74 @@ new Thread(new Runnable() {
 
     private void initializeData() {
         noticias = new ArrayList<>();
-        noticias.add(new Noticia("CRISTINA", "24.02.2017", "Cultura", R.drawable.logo_aulamagna, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
-        noticias.add(new Noticia("CHEMA", "24.02.2017", " Cultura", R.drawable.logo_aulamagna, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
-        noticias.add(new Noticia("MARCOS", "24.02.2017", "Cultura", R.drawable.logo_aulamagna, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
+        noticias.add(new Noticia("CRISTINA", "24.02.2017", "Cultura", R.drawable.logo_aulamagna_peque, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
+        noticias.add(new Noticia("CHEMA", "24.02.2017", " Cultura", R.drawable.logo_aulamagna_peque, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
+        noticias.add(new Noticia("MARCOS", "24.02.2017", "Cultura", R.drawable.logo_aulamagna_peque, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
     }
 
     private void initializeAdapter() {
         RVAdapter adapter = new RVAdapter(noticias);
         rv.setAdapter(adapter);
+    }
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.lateral_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
 

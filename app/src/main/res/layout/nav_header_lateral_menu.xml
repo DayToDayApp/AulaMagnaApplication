@@ -17,6 +17,6 @@
         android:id="@+id/imageView"
         android:layout_width="90dp"
         android:layout_height="140dp"
-        app:srcCompat="@drawable/logo_aulamagna_menu_opt" />
+        app:srcCompat="@drawable/logo_aulamagna_peque" />
 
 </LinearLayout>
