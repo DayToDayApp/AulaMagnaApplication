@@ -6,6 +6,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv"
+    android:layout_margin="7dp"
     android:focusable="true"
     android:clickable="true"
     card_view:cardCornerRadius="6dp">
@@ -31,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="15sp"
             />
 <RelativeLayout
@@ -40,6 +41,7 @@
         <TextView
             android:id="@+id/card_text_date"
             android:layout_width="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_height="wrap_content"
             android:text="20.01.2017"
 
@@ -50,6 +52,7 @@
             android:id="@+id/card_text_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
             android:text="Deporte"
             android:layout_alignParentRight="true">
 
@@ -61,7 +64,8 @@
             android:id="@+id/card_text_text"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:layout_weight="1.3"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_weight="1.3"
               android:layout_margin="10dp"/>
     </LinearLayout>
 
