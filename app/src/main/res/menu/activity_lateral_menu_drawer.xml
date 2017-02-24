@@ -10,31 +10,67 @@
     <group android:checkableBehavior="single">
 
 
-        <item android:title="Communicate"
+        <item android:title="Andalucía"
 
             >
             <menu>
                 <item
-                    android:id="@+id/nav_share"
-                    android:title="Share" />
+                    android:id="@+id/nav_almeria"
+                    android:title="Almería" />
                 <item
-                    android:id="@+id/nav_send"
-                    android:title="Send" />
+                    android:id="@+id/nav_cadiz"
+                    android:title="Cádiz" />
+                <item
+                    android:id="@+id/nav_cordoba"
+                    android:title="Córdoba" />
+                <item
+                    android:id="@+id/nav_granada"
+                    android:title="Granada" />
+                <item
+                    android:id="@+id/nav_huelva"
+                    android:title="Huelva" />
+                <item
+                    android:id="@+id/nav_jaen"
+                    android:title="Jaén" />
+                <item
+                    android:id="@+id/nav_malaga"
+                    android:title="Málaga" />
+                <item
+                    android:id="@+id/nav_sevilla"
+                    android:title="Sevilla" />
             </menu>
         </item>
 
         <item
-            android:id="@+id/nav_camera"
-            android:title="sfgsdgdg" />
+            android:id="@+id/nav_madrid"
+            android:title="Madrid" />
         <item
-            android:id="@+id/nav_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_deportes"
+            android:title="Deportes" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_emprendimiento"
+            android:title="Emprendimiento" />
+        <item
+            android:id="@+id/nav_infobecas"
+            android:title="Infobecas" />
+
+        <item android:title="Formación"
+
+            >
+            <menu>
+                <item
+                    android:id="@+id/nav_formacion_financiera"
+                    android:title="Financiera" />
+                <item
+                    android:id="@+id/nav_formacion_posgrados"
+                    android:title="Posgrados" />
+
+            </menu>
+        </item>
         <item
             android:id="@+id/nav_manage"
-            android:title="Tools" />
+            android:title="Opinion" />
+
     </group>
 
 

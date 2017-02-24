@@ -18,8 +18,6 @@ import com.example.dancd.aulamagnaapp.manager.Noticia;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.dancd.aulamagnaapp.R.id.toolbar;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private List<Noticia> noticias;
@@ -112,19 +110,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_almeria) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_cadiz) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_cordoba) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_granada) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_huelva) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_jaen) {
+
+        } else if (id == R.id.nav_malaga) {
+
+        } else if (id == R.id.nav_sevilla) {
+
+        } else if (id == R.id.nav_madrid) {
+
+        } else if (id == R.id.nav_deportes) {
+
+        } else if (id == R.id.nav_emprendimiento) {
+
+        } else if (id == R.id.nav_infobecas) {
+
+        } else if (id == R.id.nav_formacion_financiera) {
+
+        } else if (id == R.id.nav_formacion_posgrados) {
+
+        } else if (id == R.id.nav_formacion_posgrados) {
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
