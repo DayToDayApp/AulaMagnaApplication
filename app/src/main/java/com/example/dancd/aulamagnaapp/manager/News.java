@@ -5,6 +5,13 @@ public class News {
     private String date;
     private String category;
     private String text;
+
+    public News(String title, String date, String category) {
+        this.title = title;
+        this.date = date;
+        this.category= category;
+
+    }
     //private int photoId;
 
 

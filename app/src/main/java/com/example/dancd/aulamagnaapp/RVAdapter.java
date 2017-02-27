@@ -32,7 +32,7 @@ RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
             cardTitle= (TextView) itemView.findViewById(R.id.card_text_title);
             cardDate= (TextView) itemView.findViewById(R.id.card_text_date);
             cardCategory= (TextView) itemView.findViewById(R.id.card_text_category);
-            cardText= (TextView) itemView.findViewById(R.id.card_text_text);
+            //cardText= (TextView) itemView.findViewById(R.id.card_text_text);
         }
     }
 
@@ -61,7 +61,7 @@ RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         personViewHolder.cardCategory.setText(noticias.get(i).getCategory());
         personViewHolder.cardDate.setText(noticias.get(i).getDate());
         personViewHolder.cardTitle.setText(noticias.get(i).getTitle());
-        personViewHolder.cardText.setText(noticias.get(i).getText());
+        //personViewHolder.cardText.setText(noticias.get(i).getText());
     }
 
     @Override

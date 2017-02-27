@@ -20,6 +20,7 @@ import com.pkmmte.pkrss.PkRSS;
 import com.example.dancd.aulamagnaapp.manager.News;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
 
-        PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/almeria/feed/").callback(this).async();
+
+
     }
 
     private void initializeAdapter() {
@@ -97,13 +99,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_almeria) {
-            // Handle the camera action
+
+            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/almeria/feed/").callback(this).async();
         } else if (id == R.id.nav_cadiz) {
 
+            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/cadiz/feed/").callback(this).async();
         } else if (id == R.id.nav_cordoba) {
 
+            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/cordoba/feed/").callback(this).async();
         } else if (id == R.id.nav_granada) {
+
 
         } else if (id == R.id.nav_huelva) {
 
@@ -111,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_malaga) {
 
+            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/malaga/feed/").callback(this).async();
         } else if (id == R.id.nav_sevilla) {
 
         } else if (id == R.id.nav_madrid) {
@@ -133,6 +141,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
+
     @Override
     public void onPreload() {
         Log.d("On preload", "On preload");
@@ -140,14 +150,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onLoaded(List<Article> newArticles) {
+
+
         for (int i = 0; i < newArticles.size(); i++) {
-            Log.d("title", "" + newArticles.get(i).getTitle());
             String title = newArticles.get(i).getTitle();
             String date = "" + newArticles.get(i).getDate();
-            String category = "Categoría random";
+            String category = ""+ newArticles.get(i).getContent();
             String text = newArticles.get(i).getDescription();
 
-            noticias.add(new News(title, date, category, text));
+            noticias.add(new News(title, date, category));
 
         }
         initializeAdapter();
@@ -157,5 +168,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onLoadFailed() {
         Log.d("on load failed", "on load failed");
     }
+
 }
 
