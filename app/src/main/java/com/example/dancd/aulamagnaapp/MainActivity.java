@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_formacion_posgrados) {
 
-        } else if (id == R.id.nav_formacion_posgrados) {
 
         }
 
