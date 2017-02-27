@@ -17,14 +17,14 @@ import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
 
-import com.example.dancd.aulamagnaapp.manager.Noticia;
+import com.example.dancd.aulamagnaapp.manager.News;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
-    private List<Noticia> noticias = new ArrayList<>();
+    private List<News> noticias = new ArrayList<>();
     private RecyclerView rv;
 
     @Override
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String category = "Categoría random";
             String text = newArticles.get(i).getDescription();
 
-            noticias.add(new Noticia(title, date, category, text));
+            noticias.add(new News(title, date, category, text));
 
         }
         initializeAdapter();

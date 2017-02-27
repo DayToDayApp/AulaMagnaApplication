@@ -1,6 +1,6 @@
 package com.example.dancd.aulamagnaapp.manager;
 
-public class Noticia {
+public class News {
     private String title;
     private String date;
     private String category;
@@ -40,7 +40,7 @@ public class Noticia {
         this.text = text;
     }
 
-    public Noticia(String title, String date, String category, String text) {
+    public News(String title, String date, String category, String text) {
         this.title = title;
         this.date = date;
         this.category= category;

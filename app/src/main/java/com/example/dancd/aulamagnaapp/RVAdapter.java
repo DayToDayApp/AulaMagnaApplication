@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dancd.aulamagnaapp.manager.Noticia;
+import com.example.dancd.aulamagnaapp.manager.News;
 
 import java.util.List;
 
@@ -36,9 +36,9 @@ RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         }
     }
 
-    private List<Noticia> noticias;
+    private List<News> noticias;
 
-    RVAdapter(List<Noticia> persons){
+    RVAdapter(List<News> persons){
         this.noticias = persons;
     }
 
