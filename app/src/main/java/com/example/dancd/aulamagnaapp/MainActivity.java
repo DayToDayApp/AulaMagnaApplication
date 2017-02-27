@@ -1,7 +1,6 @@
 package com.example.dancd.aulamagnaapp;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,17 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.pkmmte.pkrss.Article;
+import com.pkmmte.pkrss.Callback;
+import com.pkmmte.pkrss.PkRSS;
 
 import com.example.dancd.aulamagnaapp.manager.Noticia;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
-    private List<Noticia> noticias;
+    private List<Noticia> noticias = new ArrayList<>();
     private RecyclerView rv;
 
     @Override
@@ -30,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        SystemClock.sleep(500);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,28 +51,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
 
-        initializeData();
-        initializeAdapter();
-
-
-
-
-    }
-
-    private void initializeData() {
-        noticias = new ArrayList<>();
-        noticias.add(new Noticia("CRISTINA", "24.02.2017", "Cultura", R.drawable.logo_aulamagna_peque, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
-        noticias.add(new Noticia("CHEMA", "24.02.2017", " Cultura", R.drawable.logo_aulamagna_peque, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
-        noticias.add(new Noticia("MARCOS", "24.02.2017", "Cultura", R.drawable.logo_aulamagna_peque, "GRAN APP CREADA POR NOSOTROS DAYTODAY"));
+        PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/almeria/feed/").callback(this).async();
     }
 
     private void initializeAdapter() {
         RVAdapter adapter = new RVAdapter(noticias);
         rv.setAdapter(adapter);
     }
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -142,10 +129,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onPreload() {
+        Log.d("On preload", "On preload");
+    }
+
+    @Override
+    public void onLoaded(List<Article> newArticles) {
+        for (int i = 0; i < newArticles.size(); i++) {
+            Log.d("title", "" + newArticles.get(i).getTitle());
+            String title = newArticles.get(i).getTitle();
+            String date = "" + newArticles.get(i).getDate();
+            String category = "Categoría random";
+            String text = newArticles.get(i).getDescription();
+
+            noticias.add(new Noticia(title, date, category, text));
+
+        }
+        initializeAdapter();
+    }
+
+    @Override
+    public void onLoadFailed() {
+        Log.d("on load failed", "on load failed");
     }
 }
 

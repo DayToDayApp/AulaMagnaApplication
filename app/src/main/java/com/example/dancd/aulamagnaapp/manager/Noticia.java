@@ -5,7 +5,7 @@ public class Noticia {
     private String date;
     private String category;
     private String text;
-    private int photoId;
+    //private int photoId;
 
 
     public String getTitle() {
@@ -40,19 +40,11 @@ public class Noticia {
         this.text = text;
     }
 
-    public int getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(int photoId) {
-        this.photoId = photoId;
-    }
-
-    public Noticia(String title, String date, String category, int photoId, String text) {
+    public Noticia(String title, String date, String category, String text) {
         this.title = title;
         this.date = date;
         this.category= category;
         this.text=text;
-        this.photoId = photoId;
+        //this.photoId = photoId;
     }
 }

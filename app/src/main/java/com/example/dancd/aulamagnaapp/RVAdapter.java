@@ -12,10 +12,10 @@ import com.example.dancd.aulamagnaapp.manager.Noticia;
 
 import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
+public class
+RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
 
         CardView cv;
         TextView cardTitle;
@@ -26,7 +26,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
         ViewHolder(View itemView) {
             super(itemView);
-
 
             cv = (CardView)itemView.findViewById(R.id.cv);
             cardPhoto= (ImageView) itemView.findViewById(R.id.card_image_view);
@@ -53,24 +52,17 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
         ViewHolder pvh = new ViewHolder(v);
         return pvh;
-
-
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder personViewHolder, int i) {
 
-        personViewHolder.cardPhoto.setImageResource(noticias.get(i).getPhotoId());
+        //personViewHolder.cardPhoto.setImageResource(noticias.get(i).getPhotoId());
         personViewHolder.cardCategory.setText(noticias.get(i).getCategory());
         personViewHolder.cardDate.setText(noticias.get(i).getDate());
         personViewHolder.cardTitle.setText(noticias.get(i).getTitle());
         personViewHolder.cardText.setText(noticias.get(i).getText());
-
-
-
     }
-
-
 
     @Override
     public int getItemCount() {
