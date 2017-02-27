@@ -15,58 +15,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        >
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/card_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.1"
-            android:layout_marginRight="16dp"
-            />
+            android:layout_marginRight="16dp"/>
 
         <TextView
             android:id="@+id/card_text_title"
+            tools:text="Main title"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp"
-            />
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/card_text_date"
-            android:layout_width="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_height="wrap_content"
-            android:text="20.01.2017"
+            android:gravity="start"
+            android:textColor="@color/textCardColor"
+            android:textSize="15sp"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            />
+            <TextView
+                android:id="@+id/card_text_date"
+                android:layout_width="wrap_content"
+                android:textColor="@color/textCardColor"
+                android:layout_height="wrap_content"
+                tools:text="20.01.2017"/>
 
-        <TextView
-            android:id="@+id/card_text_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="Deporte"
-            android:layout_alignParentRight="true">
-
-        </TextView>
-
-    </RelativeLayout>
-
-        <TextView
-            android:id="@+id/card_text_text"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_weight="1.3"
-              android:layout_margin="10dp"/>
+            <TextView
+                android:id="@+id/card_text_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textCardColor"
+                tools:text="Deporte"
+                android:layout_alignParentRight="true">
+            </TextView>
+        </RelativeLayout>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
