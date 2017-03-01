@@ -1,4 +1,4 @@
-package com.example.dancd.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import com.example.dancd.AulaMagnaApp.manager.News;
+import com.daytoday.app.AulaMagnaApp.R;
+import com.daytoday.app.AulaMagnaApp.RVAdapter;
+import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;

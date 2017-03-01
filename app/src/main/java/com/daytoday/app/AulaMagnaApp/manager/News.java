@@ -1,4 +1,4 @@
-package com.example.dancd.AulaMagnaApp.manager;
+package com.daytoday.app.AulaMagnaApp.manager;
 
 import android.net.Uri;
 

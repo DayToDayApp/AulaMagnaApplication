@@ -1,4 +1,4 @@
-package com.example.dancd.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dancd.AulaMagnaApp.manager.News;
+import com.daytoday.app.AulaMagnaApp.manager.News;
 
 import java.util.List;
 
