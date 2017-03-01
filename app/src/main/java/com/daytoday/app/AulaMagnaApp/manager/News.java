@@ -2,6 +2,8 @@ package com.daytoday.app.AulaMagnaApp.manager;
 
 import android.net.Uri;
 
+import java.text.SimpleDateFormat;
+
 public class News {
     private String title;
     private String date;
@@ -26,13 +28,7 @@ public class News {
         this.title = title;
     }
 
-    public String getDate() {
-        return date;
-    }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public String getCategory() {
         return category;
@@ -51,12 +47,21 @@ public class News {
         this.text = text;
     }
 
-    public News(Uri photo, String title, String date, String category, String text) {
+    public News(Uri photo, String title, String  date, String category, String text) {
         this.title = title;
         this.date = date;
         this.category= category;
         this.text=text;
         this.photoId = photo;
+    }
+
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
 

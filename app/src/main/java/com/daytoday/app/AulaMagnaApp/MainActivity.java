@@ -14,16 +14,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.daytoday.app.AulaMagnaApp.R;
-import com.daytoday.app.AulaMagnaApp.RVAdapter;
 import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
+
+import static android.R.attr.x;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
@@ -149,11 +152,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < newArticles.size(); i++) {
             Uri photo=newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
-            String date = "" + newArticles.get(i).getDate();
+            int unixSeconds = (int) newArticles.get(i).getDate();
+            Date date = new Date(unixSeconds * 1000L);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setTimeZone(TimeZone.getTimeZone("GMT-1"));
+            String formattedDate = sdf.format(date);
             String category = ""+ newArticles.get(i).getContent();
             String text = newArticles.get(i).getDescription();
 
-            noticias.add(new News(title, date, category));
+            noticias.add(new News(title, formattedDate, category));
 
         }
         initializeAdapter();
