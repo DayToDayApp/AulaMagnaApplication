@@ -14,8 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EC7063"
-        android:layout_weight="1"
+        android:layout_weight="1"/>
 
-        />
+    <Button
+        android:id="@+id/content_main_load_news_button"
+        android:text="@string/content_main_button_text"
+        android:textColor="@color/textButtonColor"
+        android:background="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"/>
 
 </LinearLayout>
