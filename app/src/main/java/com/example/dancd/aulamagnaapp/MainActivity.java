@@ -13,14 +13,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.dancd.aulamagnaapp.manager.News;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
 
-import com.example.dancd.aulamagnaapp.manager.News;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
@@ -46,19 +45,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        rv = (RecyclerView) findViewById(R.id.rv);
-
-        LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
-        rv.setLayoutManager(llm);
-        rv.setHasFixedSize(true);
-
-
-
+        initializeAdapter();
+        loadNewCategory(R.id.nav_almeria);
     }
 
     private void initializeAdapter() {
+        Log.d("","init adapter");
+
+        rv = (RecyclerView) findViewById(R.id.rv);
+
         RVAdapter adapter = new RVAdapter(noticias);
-        rv.setAdapter(adapter);
+        rv.swapAdapter(adapter, true);
+        adapter.notifyDataSetChanged();
+
+        LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
+        rv.setLayoutManager(llm);
+        // rv.setHasFixedSize(true);
     }
 
     @Override
@@ -73,19 +75,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.lateral_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             return true;
         }
@@ -99,15 +96,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        loadNewCategory(id);
 
+        closeNavigationDrawer();
+
+/*
         if (id == R.id.nav_almeria) {
-
-            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/almeria/feed/").callback(this).async();
+            category = "andalucia/almeria";
         } else if (id == R.id.nav_cadiz) {
-
-            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/cadiz/feed/").callback(this).async();
+            category = "andalucia/cadiz";
         } else if (id == R.id.nav_cordoba) {
-
             PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/cordoba/feed/").callback(this).async();
         } else if (id == R.id.nav_granada) {
 
@@ -135,23 +133,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         }
+*/
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    private void loadNewCategory(int id) {
+        HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
+            put(R.id.nav_almeria,"andalucia/almeria");
+            put(R.id.nav_cordoba,"andalucia/cordoba");
+            put(R.id.nav_cadiz,"andalucia/cadiz");
+        }};
 
+        String category = categoryMap.get(id);
+
+        String url = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
+        PkRSS.with(this).load(url).callback(this).async();
+    }
 
     @Override
     public void onPreload() {
         Log.d("On preload", "On preload");
     }
 
+
     @Override
     public void onLoaded(List<Article> newArticles) {
 
 
+        noticias = new ArrayList<>();
         for (int i = 0; i < newArticles.size(); i++) {
             String title = newArticles.get(i).getTitle();
             String date = "" + newArticles.get(i).getDate();
@@ -167,6 +177,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onLoadFailed() {
         Log.d("on load failed", "on load failed");
+    }
+
+    private void closeNavigationDrawer() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 
 }

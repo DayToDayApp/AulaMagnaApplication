@@ -13,9 +13,9 @@ import com.example.dancd.aulamagnaapp.manager.News;
 import java.util.List;
 
 public class
-RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
+RVAdapter extends RecyclerView.Adapter<RVAdapter.NewsViewHolder> {
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class NewsViewHolder extends RecyclerView.ViewHolder {
 
         CardView cv;
         TextView cardTitle;
@@ -24,7 +24,7 @@ RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         TextView cardText;
         ImageView cardPhoto;
 
-        ViewHolder(View itemView) {
+        NewsViewHolder(View itemView) {
             super(itemView);
 
             cv = (CardView)itemView.findViewById(R.id.cv);
@@ -48,14 +48,14 @@ RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public NewsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
-        ViewHolder pvh = new ViewHolder(v);
+        NewsViewHolder pvh = new NewsViewHolder(v);
         return pvh;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder personViewHolder, int i) {
+    public void onBindViewHolder(final NewsViewHolder personViewHolder, int i) {
 
         //personViewHolder.cardPhoto.setImageResource(noticias.get(i).getPhotoId());
         personViewHolder.cardCategory.setText(noticias.get(i).getCategory());
