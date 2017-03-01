@@ -1,4 +1,4 @@
-package com.example.dancd.aulamagnaapp;
+package com.example.dancd.AulaMagnaApp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

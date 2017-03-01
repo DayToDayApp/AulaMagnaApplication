@@ -1,4 +1,6 @@
-package com.example.dancd.aulamagnaapp.manager;
+package com.example.dancd.AulaMagnaApp.manager;
+
+import android.net.Uri;
 
 public class News {
     private String title;
@@ -7,12 +9,13 @@ public class News {
     private String text;
 
     public News(String title, String date, String category) {
+        //this.photoId=photo;
         this.title = title;
         this.date = date;
         this.category= category;
 
     }
-    //private int photoId;
+    private Uri photoId;
 
 
     public String getTitle() {
@@ -43,15 +46,25 @@ public class News {
         return text;
     }
 
+
     public void setText(String text) {
         this.text = text;
     }
 
-    public News(String title, String date, String category, String text) {
+    public News(Uri photo, String title, String date, String category, String text) {
         this.title = title;
         this.date = date;
         this.category= category;
         this.text=text;
-        //this.photoId = photoId;
+        this.photoId = photo;
     }
 }
+
+   /* public Uri getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Uri photoId) {
+        this.photoId = photoId;
+    }
+}*/
