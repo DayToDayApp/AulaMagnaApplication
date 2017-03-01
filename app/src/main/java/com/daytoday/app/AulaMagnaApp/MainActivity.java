@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.pkmmte.pkrss.Article;
@@ -26,18 +28,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
-import static android.R.attr.x;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
     private List<News> noticias = new ArrayList<>();
     private RecyclerView rv;
 
+    private int numberOfCard = 10;
+    private String currentUrl = "http://www.aulamagna.com.es/feed";
+
+    Button loadNewsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loadNewsButton = (Button) findViewById(R.id.content_main_load_news_button);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,12 +57,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
-
         initializeAdapter();
-        loadNewCategory(R.id.nav_almeria);
+        //loadNewCategory(R.id.nav_almeria);
+        PkRSS.with(this).load(currentUrl).callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
+
+        loadNewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initializeAdapter();
+                //PkRSS.with(view.getContext()).load(currentUrl).callback().async();
+                numberOfCard = numberOfCard + 10;   // TODO: Add an if to check end list
+            }
+        });
     }
 
     private void initializeAdapter() {
@@ -68,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.notifyDataSetChanged();
         LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
         rv.setLayoutManager(llm);
-
-
     }
 
     @Override
@@ -104,11 +114,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         loadNewCategory(id);
-
         closeNavigationDrawer();
-
         return true;
     }
 
@@ -128,14 +135,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             put(R.id.nav_infobecas,"infobecas");
             put(R.id.nav_formacion_financiera,"formacion_financiera");
             put(R.id.nav_formacion_posgrados,"formacion_posgrados");
-
-
         }};
-
         String category = categoryMap.get(id);
-
-        String url = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
-        PkRSS.with(this).load(url).callback(this).async();
+        currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
+        PkRSS.with(this).load(currentUrl).callback(this).async();
     }
 
     @Override
@@ -146,10 +149,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onLoaded(List<Article> newArticles) {
-
-
         noticias = new ArrayList<>();
-        for (int i = 0; i < newArticles.size(); i++) {
+        for (int i = 0; i < numberOfCard; i++) {
             Uri photo=newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
             int unixSeconds = (int) newArticles.get(i).getDate();
@@ -161,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String text = newArticles.get(i).getDescription();
 
             noticias.add(new News(title, formattedDate, category));
-
         }
         initializeAdapter();
     }
@@ -175,6 +175,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
-
 }
-
