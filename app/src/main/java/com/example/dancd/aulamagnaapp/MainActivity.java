@@ -1,5 +1,6 @@
-package com.example.dancd.aulamagnaapp;
+package com.example.dancd.AulaMagnaApp;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-import com.example.dancd.aulamagnaapp.manager.News;
+import com.example.dancd.AulaMagnaApp.manager.News;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private List<News> noticias = new ArrayList<>();
     private RecyclerView rv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
+
+
+
         initializeAdapter();
         loadNewCategory(R.id.nav_almeria);
     }
@@ -53,14 +60,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("","init adapter");
 
         rv = (RecyclerView) findViewById(R.id.rv);
-
         RVAdapter adapter = new RVAdapter(noticias);
         rv.swapAdapter(adapter, true);
         adapter.notifyDataSetChanged();
-
         LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
         rv.setLayoutManager(llm);
-        // rv.setHasFixedSize(true);
+
+
     }
 
     @Override
@@ -100,41 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         closeNavigationDrawer();
 
-/*
-        if (id == R.id.nav_almeria) {
-            category = "andalucia/almeria";
-        } else if (id == R.id.nav_cadiz) {
-            category = "andalucia/cadiz";
-        } else if (id == R.id.nav_cordoba) {
-            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/cordoba/feed/").callback(this).async();
-        } else if (id == R.id.nav_granada) {
-
-
-        } else if (id == R.id.nav_huelva) {
-
-        } else if (id == R.id.nav_jaen) {
-
-        } else if (id == R.id.nav_malaga) {
-
-            PkRSS.with(this).load("http://www.aulamagna.com.es/category/andalucia/malaga/feed/").callback(this).async();
-        } else if (id == R.id.nav_sevilla) {
-
-        } else if (id == R.id.nav_madrid) {
-
-        } else if (id == R.id.nav_deportes) {
-
-        } else if (id == R.id.nav_emprendimiento) {
-
-        } else if (id == R.id.nav_infobecas) {
-
-        } else if (id == R.id.nav_formacion_financiera) {
-
-        } else if (id == R.id.nav_formacion_posgrados) {
-
-
-        }
-*/
-
         return true;
     }
 
@@ -143,6 +114,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             put(R.id.nav_almeria,"andalucia/almeria");
             put(R.id.nav_cordoba,"andalucia/cordoba");
             put(R.id.nav_cadiz,"andalucia/cadiz");
+            put(R.id.nav_malaga,"andalucia/malaga");
+            put(R.id.nav_sevilla,"andalucia/sevilla");
+            put(R.id.nav_huelva,"andalucia/huelva");
+            put(R.id.nav_jaen,"andalucia/jaen");
+            put(R.id.nav_granada,"andalucia/granada");
+            put(R.id.nav_madrid,"madrid");
+            put(R.id.nav_deportes,"deportes");
+            put(R.id.nav_emprendimiento,"emprendimiento");
+            put(R.id.nav_infobecas,"infobecas");
+            put(R.id.nav_formacion_financiera,"formacion_financiera");
+            put(R.id.nav_formacion_posgrados,"formacion_posgrados");
+
+
         }};
 
         String category = categoryMap.get(id);
@@ -163,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         noticias = new ArrayList<>();
         for (int i = 0; i < newArticles.size(); i++) {
+            Uri photo=newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
             String date = "" + newArticles.get(i).getDate();
             String category = ""+ newArticles.get(i).getContent();

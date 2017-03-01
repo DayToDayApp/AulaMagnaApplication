@@ -1,4 +1,4 @@
-package com.example.dancd.aulamagnaapp;
+package com.example.dancd.AulaMagnaApp;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.dancd.aulamagnaapp.manager.News;
+import com.example.dancd.AulaMagnaApp.manager.News;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ RVAdapter extends RecyclerView.Adapter<RVAdapter.NewsViewHolder> {
     @Override
     public void onBindViewHolder(final NewsViewHolder personViewHolder, int i) {
 
-        //personViewHolder.cardPhoto.setImageResource(noticias.get(i).getPhotoId());
+        //personViewHolder.cardPhoto.setImageURI(noticias.get(i).getPhotoId());
         personViewHolder.cardCategory.setText(noticias.get(i).getCategory());
         personViewHolder.cardDate.setText(noticias.get(i).getDate());
         personViewHolder.cardTitle.setText(noticias.get(i).getTitle());

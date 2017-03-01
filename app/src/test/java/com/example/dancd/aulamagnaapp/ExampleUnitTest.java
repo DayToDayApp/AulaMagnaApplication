@@ -1,4 +1,4 @@
-package com.example.dancd.aulamagnaapp;
+package com.example.dancd.AulaMagnaApp;
 
 import org.junit.Test;
 
