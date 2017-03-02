@@ -2,11 +2,12 @@ package com.daytoday.app.AulaMagnaApp.manager;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class News {
+public class News  implements Serializable {
     private String title;
     private Date date;
     private List<String> listCategory;

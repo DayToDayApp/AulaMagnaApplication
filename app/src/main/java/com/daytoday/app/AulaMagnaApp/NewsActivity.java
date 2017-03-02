@@ -2,9 +2,10 @@ package com.daytoday.app.AulaMagnaApp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.daytoday.app.AulaMagnaApp.manager.News;
 
 public class NewsActivity extends AppCompatActivity {
 
@@ -24,12 +25,10 @@ public class NewsActivity extends AppCompatActivity {
         date= (TextView) findViewById(R.id.card_text_date1);
         image= (ImageView) findViewById(R.id.card_image_view1);
 
-        Bundle bundle = getIntent().getExtras();
+        News news = (News) getIntent().getSerializableExtra("news");
 
         image.setImageResource(R.drawable.deportes);
-        title.setText(bundle.getString("Title"));
-        description.setText(bundle.getString("Text"));
-        date.setText(bundle.getString("Date"));
-
+        title.setText(news.getTitle());
+        description.setText(news.getText());
     }
 }
