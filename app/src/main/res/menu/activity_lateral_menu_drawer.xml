@@ -1,77 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-
-
-
-
-
     <group android:checkableBehavior="single">
-
-
-        <item android:title="Andalucía"
-
-            >
+        <item
+            android:id="@+id/nav_portada"
+            android:title="@string/nav_portada_text"/>
+        <item
+            android:id="@+id/nav_andalucia"
+            android:title="@string/nav_andalucia_text">
             <menu>
                 <item
-                    android:id="@+id/nav_almeria"
-                    android:title="Almería" />
+                    android:id="@+id/nav_andalucia_almeria"
+                    android:title="@string/nav_andalucia_almeria_text"/>
                 <item
-                    android:id="@+id/nav_cadiz"
-                    android:title="Cádiz" />
+                    android:id="@+id/nav_andalucia_cadiz"
+                    android:title="@string/nav_andalucia_cadiz_text"/>
                 <item
-                    android:id="@+id/nav_cordoba"
-                    android:title="Córdoba" />
+                    android:id="@+id/nav_andalucia_cordoba"
+                    android:title="@string/nav_andalucia_cordoba_text"/>
                 <item
-                    android:id="@+id/nav_granada"
-                    android:title="Granada" />
+                    android:id="@+id/nav_andalucia_granada"
+                    android:title="@string/nav_andalucia_granada_text"/>
                 <item
-                    android:id="@+id/nav_huelva"
-                    android:title="Huelva" />
+                    android:id="@+id/nav_andalucia_huelva"
+                    android:title="@string/nav_andalucia_huelva_text"/>
                 <item
-                    android:id="@+id/nav_jaen"
-                    android:title="Jaén" />
+                    android:id="@+id/nav_andalucia_jaen"
+                    android:title="@string/nav_andalucia_jaen_text"/>
                 <item
-                    android:id="@+id/nav_malaga"
-                    android:title="Málaga" />
+                    android:id="@+id/nav_andalucia_malaga"
+                    android:title="@string/nav_andalucia_malaga_text"/>
                 <item
-                    android:id="@+id/nav_sevilla"
-                    android:title="Sevilla" />
+                    android:id="@+id/nav_andalucia_sevilla"
+                    android:title="@string/nav_andalucia_sevilla_text"/>
             </menu>
         </item>
 
         <item
             android:id="@+id/nav_madrid"
-            android:title="Madrid" />
+            android:title="@string/nav_madrid_text"/>
         <item
             android:id="@+id/nav_deportes"
-            android:title="Deportes" />
+            android:title="@string/nav_deportes_text"/>
         <item
             android:id="@+id/nav_emprendimiento"
-            android:title="Emprendimiento" />
+            android:title="@string/nav_emprendimiento_text"/>
         <item
             android:id="@+id/nav_infobecas"
-            android:title="Infobecas" />
+            android:title="@string/nav_infobecas_text"/>
 
-        <item android:title="Formación"
-
-            >
+        <item android:id="@+id/nav_formacion"
+            android:title="@string/nav_formacion_text">
             <menu>
                 <item
                     android:id="@+id/nav_formacion_financiera"
-                    android:title="Financiera" />
+                    android:title="@string/nav_formacion_financiera_text"/>
                 <item
                     android:id="@+id/nav_formacion_posgrados"
-                    android:title="Posgrados" />
-
+                    android:title="@string/nav_formacion_posgrados_text"/>
             </menu>
         </item>
         <item
-            android:id="@+id/nav_manage"
-            android:title="Opinion" />
-
+            android:id="@+id/nav_opinion"
+            android:title="@string/nav_opinion_text">
+            <menu>
+                <item
+                android:id="@+id/nav_opinion_editorial"
+                android:title="@string/nav_opinion_editorial_text"/>
+                <item
+                    android:id="@+id/nav_opinion_paraninfo"
+                    android:title="@string/nav_opinion_paraninfo_text"/>
+                <item
+                    android:id="@+id/nav_opinion_tribuna"
+                    android:title="@string/nav_opinion_tribuna_text"/>
+            </menu>
+        </item>
     </group>
-
-
 </menu>
