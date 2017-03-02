@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
-
         initializeAdapter();
         loadNewCategory(R.id.nav_almeria);
     }
