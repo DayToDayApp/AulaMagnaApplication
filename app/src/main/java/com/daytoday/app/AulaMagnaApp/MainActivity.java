@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         loadNewsButton = (Button) findViewById(R.id.content_main_load_news_button);
         progressBar= (ProgressBar) findViewById(R.id.progressbar);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -158,8 +160,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onPreload() {
         Log.d("On preload", "On preload");
-        loadNewsButton.setVisibility(View.INVISIBLE);
+        loadNewsButton.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+
 
     }
 
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void onLoaded(List<Article> newArticles) {
         loadNewsButton.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
         noticias = new ArrayList<>();
         for (int i = 0; i < numberOfCard; i++) {
             Uri photo=newArticles.get(i).getImage();
