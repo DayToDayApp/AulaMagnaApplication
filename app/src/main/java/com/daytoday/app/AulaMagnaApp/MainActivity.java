@@ -164,6 +164,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //String category = ""+ newArticles.get(i).getContent();
             String text = newArticles.get(i).getDescription();
             Date date= parseDate(d);
+            List<String> listCategory = newArticles.get(i).getTags();
+
+            // TODO: Remove this loop
+            for (int j = 0; j < listCategory.size(); j++) {
+                Log.d("categoria", "categoria" + i + ": " + listCategory.get(j));
+            }
             noticias.add(new News(title,text,date));
         }
         initializeAdapter();

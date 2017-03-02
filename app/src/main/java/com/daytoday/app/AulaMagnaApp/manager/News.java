@@ -4,11 +4,12 @@ import android.net.Uri;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class News {
     private String title;
     private Date date;
-    private String category;
+    private List<String> listCategory;
     private String text;
 
     public News(String title, String text, Date date) {
@@ -29,33 +30,29 @@ public class News {
         this.title = title;
     }
 
-
-
-    public String getCategory() {
-        return category;
+    public List<String> getListCategory() {
+        return listCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setListCategory(List<String> listCategory) {
+        this.listCategory = listCategory;
     }
 
     public String getText() {
         return text;
     }
 
-
     public void setText(String text) {
         this.text = text;
     }
 
-    public News(Uri photo, String title, Date  date, String category, String text) {
+    public News(String title, Date date, List<String> listCategory, String text, Uri photoId) {
         this.title = title;
         this.date = date;
-        this.category= category;
-        this.text=text;
-        this.photoId = photo;
+        this.listCategory = listCategory;
+        this.text = text;
+        this.photoId = photoId;
     }
-
 
     public Date getDate() {
         return date;
