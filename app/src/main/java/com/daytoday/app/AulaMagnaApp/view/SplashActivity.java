@@ -1,11 +1,11 @@
-package com.daytoday.app.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp.view;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.daytoday.app.AulaMagnaApp.MainActivity;
 import com.daytoday.app.AulaMagnaApp.R;
+import com.daytoday.app.AulaMagnaApp.activities.MainActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;

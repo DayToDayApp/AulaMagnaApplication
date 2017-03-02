@@ -11,13 +11,24 @@ import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
+import static android.R.attr.id;
+
 public class News extends RealmObject implements Serializable {
-    @PrimaryKey private String title;
+
+    @PrimaryKey private int id;
+     private String title;
     private Date date;
     @Ignore private List<String> listCategory;
     private String text;
+    public News(){
+        //empty contructor for realm-request
+    }
 
-    public News() {
+    public News(String title, String text, Date date, int id) {
+        this.title=title;
+        this.text=text;
+        this.date=date;
+        this.id=id;
     }
 
     public News(String title, String text, Date date) {
@@ -60,6 +71,14 @@ public class News extends RealmObject implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

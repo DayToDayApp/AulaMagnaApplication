@@ -1,5 +1,6 @@
-package com.daytoday.app.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,13 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daytoday.app.AulaMagnaApp.R;
+import com.daytoday.app.AulaMagnaApp.activities.MainActivity;
+import com.daytoday.app.AulaMagnaApp.activities.NewsActivity;
 import com.daytoday.app.AulaMagnaApp.manager.News;
 
 import java.util.List;
 
+import io.realm.RealmResults;
 
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.NewsViewHolder> {
+
+
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -39,11 +46,15 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.NewsViewHolder> {
     }
 
     private List<News> noticias;
+    private LayoutInflater inflater;
 
-    RVAdapter(List<News> persons){
+    public RVAdapter(List<News> persons){
         this.noticias = persons;
     }
-
+    public RVAdapter(Context context, RealmResults<News> newsRealmResults) {
+        this.noticias=newsRealmResults;
+        this.inflater=LayoutInflater.from(context);
+    }
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);

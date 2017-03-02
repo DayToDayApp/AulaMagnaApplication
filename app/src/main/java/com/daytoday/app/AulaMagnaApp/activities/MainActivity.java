@@ -1,7 +1,6 @@
-package com.daytoday.app.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp.activities;
 
 import android.net.ParseException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +17,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.daytoday.app.AulaMagnaApp.R;
+import com.daytoday.app.AulaMagnaApp.adapter.RVAdapter;
 import com.daytoday.app.AulaMagnaApp.manager.News;
+import com.daytoday.app.AulaMagnaApp.utils.Constants;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
@@ -51,22 +53,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loadNewsButton = (Button) findViewById(R.id.content_main_load_news_button);
         progressBar= (ProgressBar) findViewById(R.id.progressbar);
 
+        // make our toolbar personalized
+        Toolbar toolbar = getToolbar();
+        drawer(toolbar);
+        navbar();
+        PkRSS.with(this).load(currentUrl).callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         initializeAdapter();
-        //loadNewCategory(R.id.nav_almeria);
-        PkRSS.with(this).load(currentUrl).callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
+        paint();
+
 
         loadNewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +72,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 numberOfCard = numberOfCard + 10;   // TODO: Add an if to check end list
             }
         });
+    }
+
+    private Toolbar getToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        return toolbar;
+    }
+
+    private void navbar() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void drawer(Toolbar toolbar) {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private void initializeAdapter() {
@@ -175,32 +190,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loadNewsButton.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         noticias = new ArrayList<>();
-        for (int i = numberOfCard; i < numberOfCard + Constants.NEW_ARTICLES; i++) {
-            //Uri photo=newArticles.get(i).getImage();
+
+        for (int i = numberOfCard; i < numberOfCard+ Constants.NEW_ARTICLES; i++) {
+            int id= newArticles.get(i).getId();
             String title = newArticles.get(i).getTitle();
             String d =""+newArticles.get(i).getDate();
-            //String category = ""+ newArticles.get(i).getContent();
             String text = newArticles.get(i).getDescription();
             Date date= parseDate(d);
             List<String> listCategory = newArticles.get(i).getTags();
-
             // TODO: Remove this loop
             for (int j = 0; j < listCategory.size(); j++) {
                 Log.d("categoria", "categoria" + i + ": " + listCategory.get(j));
             }
-            noticias.add(new News(title,text,date));
+            noticias.add(new News(title,text,date,id));
         }
         initializeAdapter();
-
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        realm.copyToRealm(noticias);
+
+        realm.copyToRealmOrUpdate(noticias);
+
         realm.commitTransaction();
 
         RealmResults<News> articles = realm.where(News.class).findAll();
         for (int i = 0; i < articles.size(); i++) {
             Log.d("realm", "" + articles.get(i).getTitle());
         }
+
+
+
+
+    }
+
+    private void paint() {
+        RVAdapter adapter ;
+        Realm realm =Realm.getDefaultInstance();
+        RealmResults<News> newsRealmResults= realm.where(News.class).findAllSorted("title");
+        adapter= new RVAdapter(this,newsRealmResults);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+
     }
 
     @Override

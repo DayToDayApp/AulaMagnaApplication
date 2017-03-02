@@ -1,10 +1,11 @@
-package com.daytoday.app.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.manager.News;
 
 public class NewsActivity extends AppCompatActivity {
