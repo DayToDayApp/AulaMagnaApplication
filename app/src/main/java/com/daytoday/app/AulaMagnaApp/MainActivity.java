@@ -29,12 +29,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
     private List<News> noticias = new ArrayList<>();
     private RecyclerView rv;
 
-    private int numberOfCard = 10;
+    private int numberOfCard;
     private String currentUrl = "http://www.aulamagna.com.es/feed";
 
     Button loadNewsButton;
@@ -164,16 +167,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBar.setVisibility(View.VISIBLE);
 
 
+
     }
 
     @Override
-
     public void onLoaded(List<Article> newArticles) {
         loadNewsButton.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         noticias = new ArrayList<>();
-        for (int i = 0; i < numberOfCard; i++) {
-            Uri photo=newArticles.get(i).getImage();
+        for (int i = numberOfCard; i < numberOfCard + Constants.NEW_ARTICLES; i++) {
+            //Uri photo=newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
             String d =""+newArticles.get(i).getDate();
             //String category = ""+ newArticles.get(i).getContent();
@@ -188,6 +191,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             noticias.add(new News(title,text,date));
         }
         initializeAdapter();
+
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.copyToRealm(noticias);
+        realm.commitTransaction();
+
+        RealmResults<News> articles = realm.where(News.class).findAll();
+        for (int i = 0; i < articles.size(); i++) {
+            Log.d("realm", "" + articles.get(i).getTitle());
+        }
     }
 
     @Override
