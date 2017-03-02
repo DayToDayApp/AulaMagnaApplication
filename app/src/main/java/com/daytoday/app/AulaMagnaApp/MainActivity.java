@@ -1,5 +1,6 @@
 package com.daytoday.app.AulaMagnaApp;
 
+import android.net.ParseException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.pkmmte.pkrss.Article;
@@ -26,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String currentUrl = "http://www.aulamagna.com.es/feed";
 
     Button loadNewsButton;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         loadNewsButton = (Button) findViewById(R.id.content_main_load_news_button);
-
+        progressBar= (ProgressBar) findViewById(R.id.progressbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 initializeAdapter();
-                //PkRSS.with(view.getContext()).load(currentUrl).callback().async();
+                PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).async();
                 numberOfCard = numberOfCard + 10;   // TODO: Add an if to check end list
             }
         });
@@ -144,35 +146,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onPreload() {
         Log.d("On preload", "On preload");
+        loadNewsButton.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+
     }
 
-
     @Override
+
     public void onLoaded(List<Article> newArticles) {
+        loadNewsButton.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         noticias = new ArrayList<>();
         for (int i = 0; i < numberOfCard; i++) {
             Uri photo=newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
-            int unixSeconds = (int) newArticles.get(i).getDate();
-            Date date = new Date(unixSeconds * 1000L);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT-1"));
-            String formattedDate = sdf.format(date);
-            String category = ""+ newArticles.get(i).getContent();
+            String d =""+newArticles.get(i).getDate();
+            //String category = ""+ newArticles.get(i).getContent();
             String text = newArticles.get(i).getDescription();
-
-            noticias.add(new News(title, formattedDate, category));
+            Date date= parseDate(d);
+            noticias.add(new News(title,text,date));
         }
         initializeAdapter();
     }
 
     @Override
     public void onLoadFailed() {
+        
         Log.d("on load failed", "on load failed");
     }
 
     private void closeNavigationDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+    private static Date parseDate(String dateString) {
+        SimpleDateFormat format =
+                new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ");
+
+        Date date = null;
+        try {
+            date = format.parse(dateString);
+        } catch(ParseException | java.text.ParseException pe) {
+           Log.d("Fallo","ERROR: Cannot parse \"" + dateString + "\"");
+        }
+        return date;
     }
 }

@@ -1,26 +1,37 @@
 package com.daytoday.app.AulaMagnaApp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class NewsActivity extends AppCompatActivity {
 
-    ImageView imagen;
-    TextView textView1;
-    TextView textView2;
+    TextView title;
+    TextView description;
+    TextView date;
+    //TextView category;
+    ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        imagen= (ImageView) findViewById(R.id.image_view);
-        textView1= (TextView) findViewById(R.id.text_view);
-        textView2= (TextView) findViewById(R.id.text_view2);
+
+        title= (TextView) findViewById(R.id.card_text_title1);
+        description= (TextView) findViewById(R.id.card_text_description1);
+        date= (TextView) findViewById(R.id.card_text_date1);
+        //category= (TextView) findViewById(R.id.card_text_category1);
+        image= (ImageView) findViewById(R.id.card_image_view1);
         Bundle bundle = getIntent().getExtras();
 
-        textView1.setText(bundle.getString("Title"));
-        textView2.setText(bundle.getString("Text"));
+        image.setImageResource(R.drawable.deportes);
+        title.setText(bundle.getString("Title"));
+        description.setText(bundle.getString("Text"));
+       // category.setText(bundle.getString("Category"));
+        date.setText(bundle.getString("Date"));
+
     }
 }
