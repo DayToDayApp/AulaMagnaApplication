@@ -122,30 +122,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadNewCategory(int id) {
-        HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
-            put(R.id.nav_andalucia_almeria,"andalucia/almeria");
-            put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");
-            put(R.id.nav_andalucia_cadiz,"andalucia/cadiz");
-            put(R.id.nav_andalucia_malaga,"andalucia/malaga");
-            put(R.id.nav_andalucia_sevilla,"andalucia/sevilla");
-            put(R.id.nav_andalucia_huelva,"andalucia/huelva");
-            put(R.id.nav_andalucia_jaen,"andalucia/jaen");
-            put(R.id.nav_andalucia_granada,"andalucia/granada");
 
-            put(R.id.nav_madrid,"madrid");
-            put(R.id.nav_deportes,"deportes");
-            put(R.id.nav_emprendimiento,"emprendimiento");
-            put(R.id.nav_infobecas,"infobecas");
+        if(id == R.id.nav_portada) {
+            currentUrl = "http://www.aulamagna.com.es/feed/";
+        } else {
+            HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
+                put(R.id.nav_andalucia_almeria,"andalucia/almeria");
+                put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");
+                put(R.id.nav_andalucia_cadiz,"andalucia/cadiz");
+                put(R.id.nav_andalucia_malaga,"andalucia/malaga");
+                put(R.id.nav_andalucia_sevilla,"andalucia/sevilla");
+                put(R.id.nav_andalucia_huelva,"andalucia/huelva");
+                put(R.id.nav_andalucia_jaen,"andalucia/jaen");
+                put(R.id.nav_andalucia_granada,"andalucia/granada");
 
-            put(R.id.nav_formacion_financiera,"financiera");
-            put(R.id.nav_formacion_posgrados,"posgrados");
+                put(R.id.nav_madrid,"madrid");
+                put(R.id.nav_deportes,"deportes");
+                put(R.id.nav_emprendimiento,"emprendimiento");
+                put(R.id.nav_infobecas,"infobecas");
 
-            put(R.id.nav_opinion_editorial, "/opinion/editorial");
-            put(R.id.nav_opinion_paraninfo, "/opinion/paraninfo2");
-            put(R.id.nav_opinion_tribuna, "/opinion/tribuna");
-        }};
-        String category = categoryMap.get(id);
-        currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
+                put(R.id.nav_formacion_financiera,"financiera");
+                put(R.id.nav_formacion_posgrados,"posgrados");
+
+                put(R.id.nav_opinion_editorial, "/opinion/editorial");
+                put(R.id.nav_opinion_paraninfo, "/opinion/paraninfo2");
+                put(R.id.nav_opinion_tribuna, "/opinion/tribuna");
+            }};
+            String category = categoryMap.get(id);
+
+            currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
+        }
         PkRSS.with(this).load(currentUrl).callback(this).async();
     }
 
