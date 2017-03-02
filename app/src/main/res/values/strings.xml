@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Aula Magna</string>
     <drawable name="toolbar_image">@drawable/logo_aulamagna</drawable>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Aula Magna</string>
     <string name="title_activity_menu_principal">menu_principal</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
