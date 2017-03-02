@@ -7,11 +7,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class News  implements Serializable {
-    private String title;
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
+import io.realm.annotations.PrimaryKey;
+
+public class News extends RealmObject implements Serializable {
+    @PrimaryKey private String title;
     private Date date;
-    private List<String> listCategory;
+    @Ignore private List<String> listCategory;
     private String text;
+
+    public News() {
+    }
 
     public News(String title, String text, Date date) {
        this.text=text;
@@ -20,7 +27,7 @@ public class News  implements Serializable {
         //this.category= category;
 
     }
-    private Uri photoId;
+    //private Uri photoId;
 
 
     public String getTitle() {
@@ -45,14 +52,6 @@ public class News  implements Serializable {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public News(String title, Date date, List<String> listCategory, String text, Uri photoId) {
-        this.title = title;
-        this.date = date;
-        this.listCategory = listCategory;
-        this.text = text;
-        this.photoId = photoId;
     }
 
     public Date getDate() {
