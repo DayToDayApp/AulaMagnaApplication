@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int id= newArticles.get(i).getId();
 
 
-            RequestCreator imagen = (Picasso.with(this).load(newArticles.get(i).getImage()).);
+
             String title = newArticles.get(i).getTitle();
             String d =""+newArticles.get(i).getDate();
             String text = newArticles.get(i).getDescription();
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (int j = 0; j < listCategory.size(); j++) {
                 Log.d("categoria", "categoria" + i + ": " + listCategory.get(j));
             }
-            noticias.add(new News(title,text,date,id,imagen));
+            noticias.add(new News(title,text,date,id));
         }
         initializeAdapter();
 

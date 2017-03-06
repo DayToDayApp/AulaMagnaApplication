@@ -87,7 +87,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.NewsViewHolder> {
         personViewHolder.cardDate.setText((CharSequence) noticias.get(i).getDate());
         personViewHolder.cardTitle.setText(noticias.get(i).getTitle());
         personViewHolder.cardText.setText(noticias.get(i).getText());
-        personViewHolder.cardPhoto.setImageURI(Uri.parse(""+noticias.get(i).getImagen()));
+       // personViewHolder.cardPhoto.setImageURI(Uri.parse(""+noticias.get(i).getImagen()));
     }
 
     @Override

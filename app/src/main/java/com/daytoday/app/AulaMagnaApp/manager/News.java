@@ -24,17 +24,17 @@ public class News extends RealmObject implements Serializable {
     private Date date;
     @Ignore private List<String> listCategory;
     private String text;
-    private RequestCreator imagen;
+    //private RequestCreator imagen;
     public News(){
         //empty contructor for realm-request
     }
 
-    public News(String title, String text, Date date, int id, RequestCreator imagen) {
+    public News(String title, String text, Date date, int id) {
         this.title=title;
         this.text=text;
         this.date=date;
         this.id=id;
-        this.imagen=imagen;
+
     }
 
     public News(String title, String text, Date date) {
@@ -87,13 +87,13 @@ public class News extends RealmObject implements Serializable {
         this.id = id;
     }
 
-    public RequestCreator   getImagen() {
+/*    public RequestCreator   getImagen() {
         return imagen;
     }
 
     public void setImagen(RequestCreator   imagen) {
         this.imagen = imagen;
-    }
+    }*/
 }
 
 
