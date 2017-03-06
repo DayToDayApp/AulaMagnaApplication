@@ -1,6 +1,10 @@
 package com.daytoday.app.AulaMagnaApp.manager;
 
 import android.net.Uri;
+import android.widget.ImageView;
+
+import com.squareup.picasso.RequestCreator;
+import com.squareup.picasso.Target;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -20,15 +24,17 @@ public class News extends RealmObject implements Serializable {
     private Date date;
     @Ignore private List<String> listCategory;
     private String text;
+    private RequestCreator imagen;
     public News(){
         //empty contructor for realm-request
     }
 
-    public News(String title, String text, Date date, int id) {
+    public News(String title, String text, Date date, int id, RequestCreator imagen) {
         this.title=title;
         this.text=text;
         this.date=date;
         this.id=id;
+        this.imagen=imagen;
     }
 
     public News(String title, String text, Date date) {
@@ -38,7 +44,7 @@ public class News extends RealmObject implements Serializable {
         //this.category= category;
 
     }
-    //private Uri photoId;
+
 
 
     public String getTitle() {
@@ -80,13 +86,14 @@ public class News extends RealmObject implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public RequestCreator   getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(RequestCreator   imagen) {
+        this.imagen = imagen;
+    }
 }
 
-   /* public Uri getPhotoId() {
-        return photoId;
-    }
 
-    public void setPhotoId(Uri photoId) {
-        this.photoId = photoId;
-    }
-}*/

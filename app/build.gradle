@@ -32,5 +32,6 @@ dependencies {
     compile 'com.pkmmte.pkrss:pkrss:1.2'
     compile group: 'com.squareup.okhttp', name: 'okhttp', version: '1.6.0'
     compile group: 'com.squareup.okhttp', name: 'okhttp-urlconnection', version: '1.6.0'
+    compile "com.squareup.picasso:picasso:2.4.0"
     testCompile 'junit:junit:4.12'
 }

@@ -15,20 +15,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.adapter.RVAdapter;
 import com.daytoday.app.AulaMagnaApp.manager.News;
-import com.daytoday.app.AulaMagnaApp.utils.Constants;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+import com.squareup.picasso.Target;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import io.realm.Realm;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView rv;
 
     private int numberOfCard;
-    private String currentUrl = "http://www.aulamagna.com.es/feed";
+    private String currentUrl = "https://demo6130055.mockable.io/api/aulamagna";// "http://www.aulamagna.com.es/feed";
 
     Button loadNewsButton;
     ProgressBar progressBar;
@@ -57,11 +59,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = getToolbar();
         drawer(toolbar);
         navbar();
-        PkRSS.with(this).load(currentUrl).callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
+        PkRSS.with(this).load("http://estaticos.elmundo.es/elmundo/rss/andalucia_malaga.xml").callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
 
 
         initializeAdapter();
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+
         paint();
+        realm.copyToRealmOrUpdate(noticias);
+
+        realm.commitTransaction();
+
 
 
         loadNewsButton.setOnClickListener(new View.OnClickListener() {
@@ -144,9 +153,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void loadNewCategory(int id) {
 
         if(id == R.id.nav_portada) {
-            currentUrl = "http://www.aulamagna.com.es/feed/";
+            //currentUrl = "http://www.aulamagna.com.es/feed/";
         } else {
-            HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
+           /* HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
                 put(R.id.nav_andalucia_almeria,"andalucia/almeria");
                 put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");
                 put(R.id.nav_andalucia_cadiz,"andalucia/cadiz");
@@ -170,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }};
             String category = categoryMap.get(id);
 
-            currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
+            currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);*/
         }
         PkRSS.with(this).load(currentUrl).callback(this).async();
     }
@@ -191,8 +200,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBar.setVisibility(View.GONE);
         noticias = new ArrayList<>();
 
-        for (int i = numberOfCard; i < numberOfCard+ Constants.NEW_ARTICLES; i++) {
+        for (int i = 0; i < newArticles.size(); i++) {
             int id= newArticles.get(i).getId();
+
+
+            RequestCreator imagen = (Picasso.with(this).load(newArticles.get(i).getImage()).);
             String title = newArticles.get(i).getTitle();
             String d =""+newArticles.get(i).getDate();
             String text = newArticles.get(i).getDescription();
@@ -202,30 +214,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             for (int j = 0; j < listCategory.size(); j++) {
                 Log.d("categoria", "categoria" + i + ": " + listCategory.get(j));
             }
-            noticias.add(new News(title,text,date,id));
+            noticias.add(new News(title,text,date,id,imagen));
         }
         initializeAdapter();
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-
-        realm.copyToRealmOrUpdate(noticias);
-
-        realm.commitTransaction();
-
-        RealmResults<News> articles = realm.where(News.class).findAll();
-        for (int i = 0; i < articles.size(); i++) {
-            Log.d("realm", "" + articles.get(i).getTitle());
-        }
-
-
-
 
     }
 
     private void paint() {
         RVAdapter adapter ;
         Realm realm =Realm.getDefaultInstance();
-        RealmResults<News> newsRealmResults= realm.where(News.class).findAllSorted("title");
+        RealmResults<News> newsRealmResults= realm.where(News.class).findAllSorted("id");
         adapter= new RVAdapter(this,newsRealmResults);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
