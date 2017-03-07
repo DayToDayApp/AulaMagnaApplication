@@ -28,29 +28,19 @@ public class News extends RealmObject implements Serializable {
     @Ignore private List<String> listCategory;
     private String text;
     private String imagen;
+    private String urlComments;
 
     public News(){
         //empty contructor for realm-request
     }
-    public News(String title, String text, Date date, int id, String img){
+    public News(String title, String text, Date date, int id, String img, String urlCommets){
         this.title=title;
         this.text=text;
         this.date=date;
         this.id=id;
         this.imagen=img;
+        this.urlComments=urlCommets;
     }
-
-    public News(String title, String text, Date date, int id) {
-        this.title=title;
-        this.text=text;
-        this.date=date;
-        this.id=id;
-
-    }
-
-
-
-
 
     public String getTitle() {
         return title;
@@ -98,6 +88,14 @@ public class News extends RealmObject implements Serializable {
 
     public void setImagen(String  imagen) {
         this.imagen = imagen;
+    }
+
+    public String getUrlComments() {
+        return urlComments;
+    }
+
+    public void setUrlComments(String urlComments) {
+        this.urlComments = urlComments;
     }
 }
 
