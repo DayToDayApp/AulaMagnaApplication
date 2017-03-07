@@ -67,18 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = getToolbar();
         drawer(toolbar);
         navbar();
-
             PkRSS.with(this).load(currentUrl).callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
             initializeAdapter();
-            Realm realm = Realm.getDefaultInstance();
-            realm.beginTransaction();
-            paint();
-            realm.copyToRealmOrUpdate(noticias);
-            realm.commitTransaction();
-
-
-
-
+            paintToRealm();
 
         loadNewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.action_search) {
+            
             return true;
         }
 
@@ -200,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
     }
 
     @Override
@@ -208,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBar.setVisibility(View.GONE);
         noticias = new ArrayList<>();
 
-        for (int i = 0; i < newArticles.size(); i++) {
+        for (int i = 0; i < numberOfCard+Constants.NEW_ARTICLES; i++) {
             int id= newArticles.get(i).getId();
             String  imagen="" +newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
@@ -218,22 +211,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Date date= parseDate(""+d);
             List<String> listCategory = newArticles.get(i).getTags();
             noticias.add(new News(title,text,date,id,imagen,urlCommets));
+
+        }
+        initializeAdapter();
+
+
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveToRealm();
+    }
+
+    private void saveToRealm() {
+        Realm realm= Realm.getDefaultInstance();
+        realm.beginTransaction();
+
+        for (News newnoticia:noticias) {
+            realm.copyToRealmOrUpdate(newnoticia);
+        }
+
+        realm.commitTransaction();
+    }
+
+
+    private void paintToRealm(){
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<News> realmResults = realm.where(News.class).findAll();
+
+        for (News loadnews:realmResults) {
+            noticias.add(loadnews);
+            
         }
         initializeAdapter();
 
     }
 
-    private void paint() {
-        RVAdapter adapter ;
-        Realm realm =Realm.getDefaultInstance();
-        RealmResults<News> newsRealmResults= realm.where(News.class).findAllSorted("id");
-        adapter= new RVAdapter(this,newsRealmResults);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-
-    }
 
     @Override
     public void onLoadFailed() {

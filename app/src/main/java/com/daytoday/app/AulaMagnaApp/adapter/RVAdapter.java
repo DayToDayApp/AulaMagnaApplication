@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
@@ -66,8 +67,13 @@ public class RVAdapter extends RecyclerView.Adapter<NewsViewHolder> {
             @Override
             public void onClick(View v) {
 
-              Intent intent = new Intent(v.getContext(),NewsActivity.class);
+                Intent intent = new Intent(v.getContext(),NewsActivity.class);
                 News news = noticias.get(i);
+                Realm realm = Realm.getDefaultInstance();
+                RealmResults<News> realmResults = realm.where(News.class).findAll();
+
+                for (News loadnews:realmResults) {
+                    noticias.add(loadnews);}
                 intent.putExtra("news", news);
                 v.getContext().startActivity(intent);
 

@@ -13,6 +13,8 @@ import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
+
 public class NewsActivity extends AppCompatActivity {
 
     TextView title;
@@ -36,6 +38,7 @@ public class NewsActivity extends AppCompatActivity {
         commentsButton = (Button) findViewById(R.id.activity_news_commets_button);
 
         News news = (News) getIntent().getSerializableExtra("news");
+
 
         Picasso.with(this).load(news.getImagen()).into(image);
         title.setText(news.getTitle());
