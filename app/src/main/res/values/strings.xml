@@ -31,4 +31,6 @@
     <string name="nav_opinion_editorial_text">Editorial</string>
     <string name="nav_opinion_paraninfo_text">Paraninfo</string>
     <string name="nav_opinion_tribuna_text">Tribuna</string>
+    <string name="activity_news_image_news_text">image news</string>
+    <string name="activity_news_comments_button_text">ir a comentarios</string>
 </resources>

@@ -214,9 +214,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String title = newArticles.get(i).getTitle();
             String d =""+newArticles.get(i).getDate();
             String text = newArticles.get(i).getDescription();
+            String urlCommets = newArticles.get(i).getSource().toString() + "#respond";
             Date date= parseDate(""+d);
             List<String> listCategory = newArticles.get(i).getTags();
-            noticias.add(new News(title,text,date,id,imagen));
+            noticias.add(new News(title,text,date,id,imagen,urlCommets));
         }
         initializeAdapter();
 
