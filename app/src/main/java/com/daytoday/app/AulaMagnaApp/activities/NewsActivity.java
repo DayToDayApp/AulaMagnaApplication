@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.manager.News;
+import com.squareup.picasso.Picasso;
 
 public class NewsActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class NewsActivity extends AppCompatActivity {
 
         News news = (News) getIntent().getSerializableExtra("news");
 
-        image.setImageResource(R.drawable.deportes);
+        Picasso.with(this).load(news.getImagen()).into(image);
         title.setText(news.getTitle());
         description.setText(news.getText());
     }

@@ -1,5 +1,6 @@
 package com.daytoday.app.AulaMagnaApp.manager;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.ImageView;
 
@@ -15,7 +16,9 @@ import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
+import static android.R.attr.category;
 import static android.R.attr.id;
+import static android.R.attr.thickness;
 
 public class News extends RealmObject implements Serializable {
 
@@ -24,9 +27,17 @@ public class News extends RealmObject implements Serializable {
     private Date date;
     @Ignore private List<String> listCategory;
     private String text;
-    //private RequestCreator imagen;
+    private String imagen;
+
     public News(){
         //empty contructor for realm-request
+    }
+    public News(String title, String text, Date date, int id, String img){
+        this.title=title;
+        this.text=text;
+        this.date=date;
+        this.id=id;
+        this.imagen=img;
     }
 
     public News(String title, String text, Date date, int id) {
@@ -37,13 +48,7 @@ public class News extends RealmObject implements Serializable {
 
     }
 
-    public News(String title, String text, Date date) {
-       this.text=text;
-        this.title = title;
-        this.date = date;
-        //this.category= category;
 
-    }
 
 
 
@@ -87,13 +92,13 @@ public class News extends RealmObject implements Serializable {
         this.id = id;
     }
 
-/*    public RequestCreator   getImagen() {
+    public String  getImagen() {
         return imagen;
     }
 
-    public void setImagen(RequestCreator   imagen) {
+    public void setImagen(String  imagen) {
         this.imagen = imagen;
-    }*/
+    }
 }
 
 

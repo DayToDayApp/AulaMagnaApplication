@@ -1,6 +1,8 @@
 package com.daytoday.app.AulaMagnaApp.activities;
 
+import android.graphics.drawable.Drawable;
 import android.net.ParseException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -21,6 +25,7 @@ import android.widget.ProgressBar;
 import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.adapter.RVAdapter;
 import com.daytoday.app.AulaMagnaApp.manager.News;
+import com.daytoday.app.AulaMagnaApp.utils.Constants;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
@@ -28,6 +33,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Target;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,13 +42,15 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+import static android.os.Build.VERSION_CODES.N;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
     private List<News> noticias = new ArrayList<>();
     private RecyclerView rv;
 
     private int numberOfCard;
-    private String currentUrl = "https://demo6130055.mockable.io/api/aulamagna";// "http://www.aulamagna.com.es/feed";
+    private String currentUrl = "https://demo6130055.mockable.io/AulaMagnafeedApp";// "http://www.aulamagna.com.es/feed";
 
     Button loadNewsButton;
     ProgressBar progressBar;
@@ -59,17 +67,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = getToolbar();
         drawer(toolbar);
         navbar();
-        PkRSS.with(this).load("http://estaticos.elmundo.es/elmundo/rss/andalucia_malaga.xml").callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
+
+            PkRSS.with(this).load(currentUrl).callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
+            initializeAdapter();
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            paint();
+            realm.copyToRealmOrUpdate(noticias);
+            realm.commitTransaction();
 
 
-        initializeAdapter();
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-
-        paint();
-        realm.copyToRealmOrUpdate(noticias);
-
-        realm.commitTransaction();
 
 
 
@@ -106,11 +113,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("","init adapter");
 
         rv = (RecyclerView) findViewById(R.id.rv);
-        RVAdapter adapter = new RVAdapter(noticias);
-        rv.swapAdapter(adapter, true);
-        adapter.notifyDataSetChanged();
         LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
         rv.setLayoutManager(llm);
+
+        RVAdapter adapter = new RVAdapter(this, noticias);
+        adapter.notifyDataSetChanged();
+        rv.setAdapter(adapter);
+
     }
 
     @Override
@@ -143,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         loadNewCategory(id);
         closeNavigationDrawer();
@@ -202,19 +210,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         for (int i = 0; i < newArticles.size(); i++) {
             int id= newArticles.get(i).getId();
-
-
-
+            String  imagen="" +newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
             String d =""+newArticles.get(i).getDate();
             String text = newArticles.get(i).getDescription();
-            Date date= parseDate(d);
+            Date date= parseDate(""+d);
             List<String> listCategory = newArticles.get(i).getTags();
-            // TODO: Remove this loop
-            for (int j = 0; j < listCategory.size(); j++) {
-                Log.d("categoria", "categoria" + i + ": " + listCategory.get(j));
-            }
-            noticias.add(new News(title,text,date,id));
+            noticias.add(new News(title,text,date,id,imagen));
         }
         initializeAdapter();
 
@@ -254,4 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return date;
     }
+
+
+
 }

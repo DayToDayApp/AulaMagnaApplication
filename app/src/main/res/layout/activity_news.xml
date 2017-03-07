@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_news"
     android:layout_width="match_parent"
+    android:background="#84261c"
     android:layout_height="match_parent"
     tools:context="com.daytoday.app.AulaMagnaApp.activities.NewsActivity"
     android:orientation="vertical">
@@ -52,9 +53,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="start"
-                            android:textColor="#FF0000"
+                            android:textColor="#FFFFFF"
+                            android:background="@color/cardview_shadow_start_color"
                             android:elegantTextHeight="true"
-                            android:textSize="30dp"
+                            android:textSize="20dp"
                             android:padding="4dp"/>
 
 
@@ -66,7 +68,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="18dp"
-                            android:textColor="#000"
+                            android:textColor="#FFFFFF"
                             android:textAlignment="gravity"
                             />
 
@@ -88,7 +90,7 @@
                                     android:id="@+id/card_text_category1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="#BDBDBD"
+                                    android:textColor="#FFFFFF"
                                     tools:text="Deporte"
                                     android:textStyle="bold"
                                     android:layout_alignParentRight="true">
