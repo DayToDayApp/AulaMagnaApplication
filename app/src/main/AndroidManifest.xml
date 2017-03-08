@@ -16,6 +16,12 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity
+            android:name=".HemerotecaActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
