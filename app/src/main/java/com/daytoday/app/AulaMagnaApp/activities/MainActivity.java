@@ -1,12 +1,6 @@
 package com.daytoday.app.AulaMagnaApp.activities;
 
-<<<<<<< HEAD
-=======
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.ParseException;
-import android.net.Uri;
->>>>>>> a4a210671a3a33caee67778b5f7c41f09c684b58
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,14 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import com.daytoday.app.AulaMagnaApp.HemerotecaActivity;
 import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.adapter.RVAdapter;
 import com.daytoday.app.AulaMagnaApp.manager.News;
@@ -34,6 +27,7 @@ import com.pkmmte.pkrss.PkRSS;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import io.realm.Realm;
@@ -58,11 +52,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loadNewsButton = (Button) findViewById(R.id.content_main_load_news_button);
         progressBar= (ProgressBar) findViewById(R.id.progressbar);
 
-        // make our toolbar personalized
         Toolbar toolbar = getToolbar();
         drawer(toolbar);
         navbar();
-            PkRSS.with(this).load(currentUrl).callback(this).async();   //TODO: Add this line inside onClick loadNewsButton
+            PkRSS.with(this).load(currentUrl).callback(this).async();
             initializeAdapter();
             paintToRealm();
 
@@ -71,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 initializeAdapter();
                 PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).async();
-                numberOfCard = numberOfCard + 10;   // TODO: Add an if to check end list
+                numberOfCard = numberOfCard + 10;
             }
         });
     }
@@ -96,8 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initializeAdapter() {
-        Log.d("","init adapter");
-
         rv = (RecyclerView) findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
         rv.setLayoutManager(llm);
@@ -105,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         RVAdapter adapter = new RVAdapter(this, noticias);
         adapter.notifyDataSetChanged();
         rv.setAdapter(adapter);
-
     }
 
     @Override
@@ -124,15 +114,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    //TODO: Implement search
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_search) {
-            
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -146,18 +135,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadNewCategory(int id) {
-
         if(id == R.id.nav_portada) {
-            //currentUrl = "http://www.aulamagna.com.es/feed/";
+            currentUrl = "http://www.aulamagna.com.es/feed/";
         } else if (id == R.id.nav_hemeroteca) {
-
             Intent intent = new Intent(MainActivity.this, HemerotecaActivity.class);
             startActivity(intent);
-
-
         }  else {
-
-           /* HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
+            HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
                 put(R.id.nav_andalucia_almeria,"andalucia/almeria");
                 put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");
                 put(R.id.nav_andalucia_cadiz,"andalucia/cadiz");
@@ -181,20 +165,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }};
             String category = categoryMap.get(id);
 
-            currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);*/
+            currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
         }
         PkRSS.with(this).load(currentUrl).callback(this).async();
     }
 
     @Override
     public void onPreload() {
-        Log.d("On preload", "On preload");
         loadNewsButton.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
     }
-
-
-
 
     @Override
     public void onLoaded(List<Article> newArticles) {
@@ -213,9 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             List<String> listCategory = newArticles.get(i).getTags();
             noticias.add(new News(title,text,date,id,imagen,urlCommets));
         }
-
         initializeAdapter();
-
     }
 
     @Override
@@ -231,10 +209,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (News newnoticia:noticias) {
             realm.copyToRealmOrUpdate(newnoticia);
         }
-
         realm.commitTransaction();
     }
-
 
     private void paintToRealm(){
         Realm realm = Realm.getDefaultInstance();
@@ -244,16 +220,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             noticias.add(loadnews);
             
         }
-
         initializeAdapter();
-
     }
-
 
     @Override
     public void onLoadFailed() {
-        
-        Log.d("on load failed", "on load failed");
+        Toast.makeText(getApplicationContext(), "Error: no es posible conectar", Toast.LENGTH_LONG).show();
     }
 
     private void closeNavigationDrawer() {
@@ -265,7 +237,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             long timestamp = Long.parseLong(dateString);
             date = new Date(timestamp * 1000l);
-            Log.d("timestamp", "" + date );
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -282,10 +253,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // SimpleDateFormat format =
         //        new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ");
 
-
         return date;
     }
-
-
-
 }

@@ -12,13 +12,13 @@
         android:theme="@style/AppTheme"
         android:name=".AulaMagnaAplication">
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:screenOrientation="portrait">
 
         </activity>
 
         <activity
-            android:name=".HemerotecaActivity"
+            android:name=".activities.HemerotecaActivity"
             android:screenOrientation="portrait">
 
         </activity>

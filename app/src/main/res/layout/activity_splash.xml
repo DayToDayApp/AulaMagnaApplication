@@ -4,7 +4,7 @@
     android:id="@+id/activity_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.daytoday.app.AulaMagnaApp.view.SplashActivity">
+    tools:context="com.daytoday.app.AulaMagnaApp.activities.SplashActivity">
 
     <ImageView
         android:id="@+id/activity_splash_image"

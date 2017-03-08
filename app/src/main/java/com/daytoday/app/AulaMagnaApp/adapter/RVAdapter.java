@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.daytoday.app.AulaMagnaApp.NewsViewHolder;
+import com.daytoday.app.AulaMagnaApp.view.NewsViewHolder;
 import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.activities.NewsActivity;
 import com.daytoday.app.AulaMagnaApp.manager.News;
@@ -27,10 +27,12 @@ public class RVAdapter extends RecyclerView.Adapter<NewsViewHolder> {
         this.noticias = persons;
         this.inflater=LayoutInflater.from(context);
     }
+
     public RVAdapter(Context context, RealmResults<News> newsRealmResults) {
         this.noticias=newsRealmResults;
         this.inflater=LayoutInflater.from(context);
     }
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
@@ -53,29 +55,23 @@ public class RVAdapter extends RecyclerView.Adapter<NewsViewHolder> {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(),NewsActivity.class);
-                News news = noticias.get(i);
-                Realm realm = Realm.getDefaultInstance();
-                RealmResults<News> realmResults = realm.where(News.class).findAll();
+            Intent intent = new Intent(v.getContext(),NewsActivity.class);
+            News news = noticias.get(i);
+            Realm realm = Realm.getDefaultInstance();
+            RealmResults<News> realmResults = realm.where(News.class).findAll();
 
-                for (News loadnews:realmResults) {
-                    noticias.add(loadnews);
-                }
-                intent.putExtra("news_id", news.getId());
-                v.getContext().startActivity(intent);
-
-
+            for (News loadnews:realmResults) {
+                noticias.add(loadnews);
+            }
+            intent.putExtra("news_id", news.getId());
+            v.getContext().startActivity(intent);
             }
             
         });
-
       }
-
 
     @Override
     public int getItemCount() {
         return noticias.size();
     }
-
-
 }

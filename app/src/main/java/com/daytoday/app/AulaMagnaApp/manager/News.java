@@ -18,8 +18,8 @@ public class News extends RealmObject {
     private String urlComments;
 
     public News(){
-        //empty contructor for realm-request
     }
+
     public News(String title, String text, Date date, int id, String img, String urlCommets){
         this.title=title;
         this.text=text;

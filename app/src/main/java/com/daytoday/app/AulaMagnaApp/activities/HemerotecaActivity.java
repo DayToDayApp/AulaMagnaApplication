@@ -1,4 +1,4 @@
-package com.daytoday.app.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.daytoday.app.AulaMagnaApp.R;
 
 public class HemerotecaActivity extends AppCompatActivity {
 
@@ -39,23 +41,11 @@ public class HemerotecaActivity extends AppCompatActivity {
     ImageView pdf27;
     ImageView pdf28;
     ImageView pdf29;
-    ImageView pdf30;
-
-
-
-
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hemeroteca);
-
 
         pdf1 = (ImageView) findViewById(R.id.pdf1);
         pdf1.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +59,6 @@ public class HemerotecaActivity extends AppCompatActivity {
 
             }
         });
-
 
         pdf2 = (ImageView) findViewById(R.id.pdf2);
         pdf2.setOnClickListener(new View.OnClickListener() {
@@ -436,10 +425,5 @@ public class HemerotecaActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
     }
 }

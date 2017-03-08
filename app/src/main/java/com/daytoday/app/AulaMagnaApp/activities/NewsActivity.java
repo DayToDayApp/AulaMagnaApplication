@@ -31,13 +31,11 @@ public class NewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-
         title= (TextView) findViewById(R.id.card_text_title1);
         description= (TextView) findViewById(R.id.card_text_description1);
         date= (TextView) findViewById(R.id.card_text_date1);
         image= (ImageView) findViewById(R.id.card_image_view1);
         commentsButton = (Button) findViewById(R.id.activity_news_commets_button);
-
 
         int id =  getIntent().getIntExtra("news_id", -1);
 
@@ -48,7 +46,6 @@ public class NewsActivity extends AppCompatActivity {
         if (query.count() == 1) {
             news = query.findFirst();
         }
-
 
         Picasso.with(this).load(news.getImagen()).into(image);
         title.setText(news.getTitle());

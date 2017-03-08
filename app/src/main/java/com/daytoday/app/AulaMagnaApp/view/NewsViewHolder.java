@@ -1,6 +1,5 @@
-package com.daytoday.app.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp.view;
 
-import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,9 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.squareup.picasso.Picasso;
-
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -21,7 +20,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     TextView cardText;
     ImageView cardPhoto;
 
-
     public NewsViewHolder(View itemView) {
         super(itemView);
 
@@ -30,7 +28,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         cardTitle= (TextView) itemView.findViewById(R.id.card_text_title);
         cardDate= (TextView) itemView.findViewById(R.id.card_text_date);
         cardText= (TextView) itemView.findViewById(R.id.card_text_description);
-
     }
 
     public News getNews() {
@@ -43,7 +40,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         cardText.setText(news.getText());
         cardDate.setText("" + news.getDate());
         try {
-            Log.d("Picasso", "" + news.getImagen());
             Picasso.with(itemView.getContext()).load(news.getImagen()).into(cardPhoto);
         }catch (Exception e){
             Log.d("LIST ERROR", "Row " + news.getId() + " doesnt have image resource");
