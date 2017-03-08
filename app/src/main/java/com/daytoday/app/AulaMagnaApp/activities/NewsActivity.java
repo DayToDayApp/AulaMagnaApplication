@@ -13,7 +13,8 @@ import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
+import io.realm.Realm;
+import io.realm.RealmQuery;
 
 public class NewsActivity extends AppCompatActivity {
 
@@ -37,7 +38,16 @@ public class NewsActivity extends AppCompatActivity {
         image= (ImageView) findViewById(R.id.card_image_view1);
         commentsButton = (Button) findViewById(R.id.activity_news_commets_button);
 
-        News news = (News) getIntent().getSerializableExtra("news");
+
+        int id =  getIntent().getIntExtra("news_id", -1);
+
+        RealmQuery<News> query = Realm.getDefaultInstance().where(News.class).equalTo("id", id);
+
+        News news = null;
+
+        if (query.count() == 1) {
+            news = query.findFirst();
+        }
 
 
         Picasso.with(this).load(news.getImagen()).into(image);

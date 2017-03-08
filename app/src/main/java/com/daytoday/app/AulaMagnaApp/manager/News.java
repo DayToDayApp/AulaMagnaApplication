@@ -1,14 +1,5 @@
 package com.daytoday.app.AulaMagnaApp.manager;
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.widget.ImageView;
-
-import com.squareup.picasso.RequestCreator;
-import com.squareup.picasso.Target;
-
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -16,11 +7,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
-import static android.R.attr.category;
-import static android.R.attr.id;
-import static android.R.attr.thickness;
-
-public class News extends RealmObject implements Serializable {
+public class News extends RealmObject {
 
     @PrimaryKey private int id;
      private String title;

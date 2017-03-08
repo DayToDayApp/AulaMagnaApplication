@@ -1,8 +1,5 @@
 package com.daytoday.app.AulaMagnaApp.activities;
 
-import android.graphics.drawable.Drawable;
-import android.net.ParseException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,10 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.daytoday.app.AulaMagnaApp.R;
@@ -29,20 +23,13 @@ import com.daytoday.app.AulaMagnaApp.utils.Constants;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
-import com.squareup.picasso.Target;
 
-import java.lang.reflect.InvocationTargetException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-
-import static android.os.Build.VERSION_CODES.N;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
@@ -262,15 +249,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
     }
     private static Date parseDate(String dateString) {
-        SimpleDateFormat format =
-                new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ");
-
         Date date = null;
         try {
-            date = format.parse(dateString);
-        } catch(ParseException | java.text.ParseException pe) {
-           Log.d("Fallo","ERROR: Cannot parse \"" + dateString + "\"");
+            long timestamp = Long.parseLong(dateString);
+            date = new Date(timestamp * 1000l);
+            Log.d("timestamp", "" + date );
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
+
+        /**
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        String dateToStr = format.format(date);
+        try {
+            d = format.parse(dateToStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        // SimpleDateFormat format =
+        //        new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ");
+
+
         return date;
     }
 

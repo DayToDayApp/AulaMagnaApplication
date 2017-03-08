@@ -1,35 +1,21 @@
 package com.daytoday.app.AulaMagnaApp.adapter;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.transition.Fade;
-import android.support.transition.TransitionManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Transition;
-import android.transition.TransitionValues;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.daytoday.app.AulaMagnaApp.NewsViewHolder;
 import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.activities.NewsActivity;
 import com.daytoday.app.AulaMagnaApp.manager.News;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 
 public class RVAdapter extends RecyclerView.Adapter<NewsViewHolder> {
@@ -73,8 +59,9 @@ public class RVAdapter extends RecyclerView.Adapter<NewsViewHolder> {
                 RealmResults<News> realmResults = realm.where(News.class).findAll();
 
                 for (News loadnews:realmResults) {
-                    noticias.add(loadnews);}
-                intent.putExtra("news", news);
+                    noticias.add(loadnews);
+                }
+                intent.putExtra("news_id", news.getId());
                 v.getContext().startActivity(intent);
 
 
