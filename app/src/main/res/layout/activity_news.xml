@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_news"
     android:layout_width="match_parent"
-    android:background="#84261c"
+    android:background="#FFF"
     android:layout_height="match_parent"
     tools:context="com.daytoday.app.AulaMagnaApp.activities.NewsActivity"
     android:orientation="vertical">
@@ -32,14 +32,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    >
 
                         <ImageView
                             android:id="@+id/card_image_view1"
                             android:layout_width="match_parent"
                             android:layout_height="230dp"
                             android:scaleType="centerCrop"
-                            android:layout_marginBottom="10dp"
                             android:contentDescription="@string/activity_news_image_news_text"/>
 
                         <TextView
@@ -50,18 +49,18 @@
                             android:layout_height="match_parent"
                             android:gravity="start"
                             android:textColor="#FFFFFF"
-                            android:background="@color/cardview_shadow_start_color"
+                            android:background="@color/colorPrimary"
                             android:elegantTextHeight="true"
                             android:textSize="20sp"
-                            android:padding="4dp"/>
+                            android:padding="14dp"/>
 
                         <TextView
-                            android:padding="7dp"
+                            android:padding="14dp"
                             android:id="@+id/card_text_description1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="18sp"
-                            android:textColor="#FFFFFF"
+                            android:textColor="#000"
                             android:textAlignment="gravity"
                             />
 
@@ -73,7 +72,6 @@
                                 <TextView
                                     android:id="@+id/card_text_date1"
                                     android:layout_width="wrap_content"
-                                    android:textColor="#BDBDBD"
                                     android:layout_height="wrap_content"
                                     android:textStyle="bold"
                                     tools:text="20.01.2017"/>
@@ -92,6 +90,9 @@
                         android:id="@+id/activity_news_commets_button"
                         android:text="@string/activity_news_comments_button_text"
                         android:layout_width="match_parent"
+                        android:background="@drawable/button_red"
+                        android:textColor="#FFF"
+                        android:layout_margin="20dp"
                         android:layout_height="50dp" />
                 </LinearLayout>
         </ScrollView>
