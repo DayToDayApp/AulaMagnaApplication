@@ -1,5 +1,12 @@
 package com.daytoday.app.AulaMagnaApp.activities;
 
+<<<<<<< HEAD
+=======
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.ParseException;
+import android.net.Uri;
+>>>>>>> a4a210671a3a33caee67778b5f7c41f09c684b58
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.daytoday.app.AulaMagnaApp.HemerotecaActivity;
 import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.adapter.RVAdapter;
 import com.daytoday.app.AulaMagnaApp.manager.News;
@@ -141,7 +149,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(id == R.id.nav_portada) {
             //currentUrl = "http://www.aulamagna.com.es/feed/";
-        } else {
+        } else if (id == R.id.nav_hemeroteca) {
+
+            Intent intent = new Intent(MainActivity.this, HemerotecaActivity.class);
+            startActivity(intent);
+
+
+        }  else {
+
            /* HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
                 put(R.id.nav_andalucia_almeria,"andalucia/almeria");
                 put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");
@@ -176,11 +191,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("On preload", "On preload");
         loadNewsButton.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
-
-
-
-
     }
+
+
+
 
     @Override
     public void onLoaded(List<Article> newArticles) {
@@ -198,12 +212,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Date date= parseDate(""+d);
             List<String> listCategory = newArticles.get(i).getTags();
             noticias.add(new News(title,text,date,id,imagen,urlCommets));
-
         }
+
         initializeAdapter();
-
-
-
 
     }
 
@@ -233,6 +244,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             noticias.add(loadnews);
             
         }
+
         initializeAdapter();
 
     }

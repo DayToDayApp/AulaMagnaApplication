@@ -76,4 +76,8 @@
             </menu>
         </item>
     </group>
+
+    <item
+        android:id="@+id/nav_hemeroteca"
+        android:title="@string/nav_hemeroteca_text"/>
 </menu>
