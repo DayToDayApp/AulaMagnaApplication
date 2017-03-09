@@ -121,15 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //TODO: Implement search
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if (id == R.id.action_search) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -254,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String urlCommets = newArticles.get(i).getSource().toString() + "#respond";
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US);
             dateFormat.setTimeZone(Calendar.getInstance().getTimeZone());
-
+            String urlSource="" +newArticles.get(i).getSource();
             Date pkrssparseddate = new Date(newArticles.get(i).getDate() * 1000);
             try {
                 Date parse = dateFormat.parse(pkrssparseddate.toString());
@@ -264,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Date date = convertDateFromUnixDate(String.valueOf(pkrssparseddate));
             String dateStr = formatDateAsDayMonthYearHourMin(pkrssparseddate);
             List<String> listCategory = newArticles.get(i).getTags();
-            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets));
+            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets,urlSource));
         }
         initializeAdapter();
     }

@@ -55,7 +55,7 @@ public class NewsActivity extends AppCompatActivity {
         Picasso.with(this).load(news.getImagen()).into(image);
         title.setText(news.getTitle());
         description.setText(news.getText());
-
+        date.setText(news.getDate());
         final String urlSorce = news.getUrlSource();
         continueRead.setOnClickListener(new View.OnClickListener() {
             @Override
