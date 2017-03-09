@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +25,20 @@ import com.daytoday.app.AulaMagnaApp.utils.Constants;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
+import com.pkmmte.pkrss.RequestCreator;
+import com.pkmmte.pkrss.parser.AtomParser;
+import com.pkmmte.pkrss.parser.Parser;
+import com.pkmmte.pkrss.parser.Rss2Parser;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -113,7 +123,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.lateral_menu, menu);
         return true;
     }
-    
+
+    //TODO: Implement search
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_search) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -124,16 +145,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadNewCategory(int id) {
-        if (id == R.id.nav_portada) {
+        if(id == R.id.nav_portada) {
             currentUrl = "http://www.aulamagna.com.es/feed/";
         } else if (id == R.id.nav_hemeroteca) {
             Intent intent = new Intent(MainActivity.this, HemerotecaActivity.class);
             startActivity(intent);
-        } else if(id == R.id.nav_aboutus) {
-
-            Intent intent = new Intent(MainActivity.this, AboutUsDevelopers.class);
-            startActivity(intent);
-        }else{
+        }  else {
             HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
                 put(R.id.nav_andalucia_almeria,"andalucia/almeria");
                 put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");
@@ -160,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
         }
+
         PkRSS.with(this).load(currentUrl).callback(this).async();
     }
 
@@ -179,13 +197,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int id= newArticles.get(i).getId();
             String  imagen="" +newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
-            String d =""+newArticles.get(i).getDate();
             String text = newArticles.get(i).getDescription();
             String urlCommets = newArticles.get(i).getSource().toString() + "#respond";
-            String urlNews=newArticles.get(i).getSource().toString();
-            Date date= parseDate(""+d);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US);
+            dateFormat.setTimeZone(Calendar.getInstance().getTimeZone());
+
+            Date pkrssparseddate = new Date(newArticles.get(i).getDate());
+            try {
+                Date parse = dateFormat.parse(pkrssparseddate.toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Date date = convertDateFromUnixDate(String.valueOf(pkrssparseddate));
+            String dateStr = formatDateAsDayMonthYearHourMin(date);
             List<String> listCategory = newArticles.get(i).getTags();
-            noticias.add(new News(title,text,date,id,imagen,urlCommets,urlNews));
+            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets));
         }
         initializeAdapter();
     }
@@ -226,27 +252,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
-    private static Date parseDate(String dateString) {
+
+    public static Date convertDateFromUnixDate(String unixDateAsString) {
         Date date = null;
         try {
-            long timestamp = Long.parseLong(dateString);
+            long timestamp = Long.parseLong(unixDateAsString);
             date = new Date(timestamp * 1000l);
-
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
-        /**
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        String dateToStr = format.format(date);
-        try {
-            d = format.parse(dateToStr);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-        // SimpleDateFormat format =
-        //        new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ");
-
         return date;
+    }
+
+    public static String formatDateAsDayMonthYearHourMin(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String dateStr = simpleDateFormat.format(date);
+
+        return dateStr;
     }
 }
