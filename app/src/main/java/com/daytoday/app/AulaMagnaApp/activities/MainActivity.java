@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,13 +21,10 @@ import com.daytoday.app.AulaMagnaApp.R;
 import com.daytoday.app.AulaMagnaApp.adapter.RVAdapter;
 import com.daytoday.app.AulaMagnaApp.manager.News;
 import com.daytoday.app.AulaMagnaApp.utils.Constants;
+import com.daytoday.app.AulaMagnaApp.utils.MyRss2Parser;
 import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
-import com.pkmmte.pkrss.RequestCreator;
-import com.pkmmte.pkrss.parser.AtomParser;
-import com.pkmmte.pkrss.parser.Parser;
-import com.pkmmte.pkrss.parser.Rss2Parser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,10 +34,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback {
 
@@ -65,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = getToolbar();
         drawer(toolbar);
         navbar();
-            PkRSS.with(this).load(currentUrl).callback(this).async();
-            initializeAdapter();
-            paintToRealm();
+        PkRSS.with(this).load(currentUrl).callback(this).parser(new MyRss2Parser()).async();
+        initializeAdapter();
+        paintToRealm();
 
         loadNewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,43 +174,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             currentUrl = String.format("http://www.aulamagna.com.es/category/%s/feed/", category);
         }
 
+
         PkRSS.with(this).load(currentUrl).callback(this).async();
     }
 
-    @Override
-    public void onPreload() {
-        loadNewsButton.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
-    }
 
-    @Override
-    public void onLoaded(List<Article> newArticles) {
-        loadNewsButton.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
-        noticias = new ArrayList<>();
 
-        for (int i = 0; i < numberOfCard+Constants.NEW_ARTICLES; i++) {
-            int id= newArticles.get(i).getId();
-            String  imagen="" +newArticles.get(i).getImage();
-            String title = newArticles.get(i).getTitle();
-            String text = newArticles.get(i).getDescription();
-            String urlCommets = newArticles.get(i).getSource().toString() + "#respond";
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US);
-            dateFormat.setTimeZone(Calendar.getInstance().getTimeZone());
-
-            Date pkrssparseddate = new Date(newArticles.get(i).getDate());
-            try {
-                Date parse = dateFormat.parse(pkrssparseddate.toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Date date = convertDateFromUnixDate(String.valueOf(pkrssparseddate));
-            String dateStr = formatDateAsDayMonthYearHourMin(date);
-            List<String> listCategory = newArticles.get(i).getTags();
-            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets));
-        }
-        initializeAdapter();
-    }
 
     @Override
     protected void onPause() {
@@ -238,15 +203,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         for (News loadnews:realmResults) {
             noticias.add(loadnews);
-            
+
         }
         initializeAdapter();
     }
 
-    @Override
-    public void onLoadFailed() {
-        Toast.makeText(getApplicationContext(), "Error: no es posible conectar", Toast.LENGTH_LONG).show();
-    }
 
     private void closeNavigationDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -270,5 +231,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String dateStr = simpleDateFormat.format(date);
 
         return dateStr;
+    }
+
+
+    @Override
+    public void onPreload() {
+        loadNewsButton.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onLoaded(List<Article> newArticles) {
+        loadNewsButton.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        noticias = new ArrayList<>();
+
+        for (int i = 0; i < numberOfCard+Constants.NEW_ARTICLES; i++) {
+            int id= newArticles.get(i).getId();
+            String  imagen="" +newArticles.get(i).getImage();
+            String title = newArticles.get(i).getTitle();
+            String text = newArticles.get(i).getDescription();
+            String urlCommets = newArticles.get(i).getSource().toString() + "#respond";
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US);
+            dateFormat.setTimeZone(Calendar.getInstance().getTimeZone());
+
+            Date pkrssparseddate = new Date(newArticles.get(i).getDate() * 1000);
+            try {
+                Date parse = dateFormat.parse(pkrssparseddate.toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            // Date date = convertDateFromUnixDate(String.valueOf(pkrssparseddate));
+            String dateStr = formatDateAsDayMonthYearHourMin(pkrssparseddate);
+            List<String> listCategory = newArticles.get(i).getTags();
+            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets));
+        }
+        initializeAdapter();
+    }
+
+    @Override
+    public void onLoadFailed() {
+        Toast.makeText(getApplicationContext(), "Error: no es posible conectar", Toast.LENGTH_LONG).show();
+
     }
 }
