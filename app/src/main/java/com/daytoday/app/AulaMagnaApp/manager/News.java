@@ -10,8 +10,8 @@ import io.realm.annotations.PrimaryKey;
 public class News extends RealmObject {
 
     @PrimaryKey private int id;
-     private String title;
-    private Date date;
+    private String title;
+    private String date;
     @Ignore private List<String> listCategory;
     private String text;
     private String imagen;
@@ -20,7 +20,7 @@ public class News extends RealmObject {
     public News(){
     }
 
-    public News(String title, String text, Date date, int id, String img, String urlCommets){
+    public News(String title, String text, String date, int id, String img, String urlCommets){
         this.title=title;
         this.text=text;
         this.date=date;
@@ -53,11 +53,11 @@ public class News extends RealmObject {
         this.text = text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
