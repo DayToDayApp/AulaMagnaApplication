@@ -26,7 +26,6 @@ import com.pkmmte.pkrss.Article;
 import com.pkmmte.pkrss.Callback;
 import com.pkmmte.pkrss.PkRSS;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import io.realm.Realm;
 import io.realm.RealmResults;
 
 
@@ -120,9 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    //TODO: Implement search
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -138,7 +133,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_hemeroteca) {
             Intent intent = new Intent(MainActivity.this, HemerotecaActivity.class);
             startActivity(intent);
-        }  else {
+        }  else if(id == R.id.nav_aboutus){
+            Intent intent = new Intent (MainActivity.this, AboutUsDevelopers.class);
+            startActivity(intent);
+        }
+        else {
             HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
                 put(R.id.nav_andalucia_almeria,"andalucia/almeria");
                 put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");
@@ -178,9 +177,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onPause();
         saveToRealm();
     }
-
     private void saveToRealm() {
-        Realm realm= Realm.getDefaultInstance();
+        io.realm.Realm realm= io.realm.Realm.getDefaultInstance();
         realm.beginTransaction();
 
         for (News newnoticia:noticias) {
@@ -189,34 +187,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         realm.commitTransaction();
     }
 
-    private void paintToRealm(){
-        Realm realm = Realm.getDefaultInstance();
+    private  void paintToRealm(){
+        io.realm.Realm realm = io.realm.Realm.getDefaultInstance();
         RealmResults<News> realmResults = realm.where(News.class).findAll();
 
         for (News loadnews:realmResults) {
             noticias.add(loadnews);
-
         }
         initializeAdapter();
     }
-
 
     private void closeNavigationDrawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    public static Date convertDateFromUnixDate(String unixDateAsString) {
-        Date date = null;
-        try {
-            long timestamp = Long.parseLong(unixDateAsString);
-            date = new Date(timestamp * 1000l);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        return date;
-    }
 
     public static String formatDateAsDayMonthYearHourMin(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -239,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         noticias = new ArrayList<>();
 
         for (int i = 0; i < numberOfCard+Constants.NEW_ARTICLES; i++) {
+            // parse the id for use in Realm
             int id= newArticles.get(i).getId();
             String  imagen="" +newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
@@ -248,12 +234,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             dateFormat.setTimeZone(Calendar.getInstance().getTimeZone());
             String urlSource="" +newArticles.get(i).getSource();
             Date pkrssparseddate = new Date(newArticles.get(i).getDate() * 1000);
-            try {
-                Date parse = dateFormat.parse(pkrssparseddate.toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            // Date date = convertDateFromUnixDate(String.valueOf(pkrssparseddate));
             String dateStr = formatDateAsDayMonthYearHourMin(pkrssparseddate);
             List<String> listCategory = newArticles.get(i).getTags();
             noticias.add(new News(title,text,dateStr,id,imagen,urlCommets,urlSource));
@@ -263,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onLoadFailed() {
+        //When we don't have conection show a toastBar
         Toast.makeText(getApplicationContext(), "Error: no es posible conectar", Toast.LENGTH_LONG).show();
 
     }
