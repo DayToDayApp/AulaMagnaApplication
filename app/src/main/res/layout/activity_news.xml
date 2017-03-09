@@ -63,6 +63,14 @@
                             android:textColor="#000"
                             android:textAlignment="gravity"
                             />
+                        <TextView
+                            android:id="@+id/text_continue_read"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="Seguir leyendo"
+                            android:textColor="#012345"
+                            android:gravity="center"
+                            android:textStyle="italic"/>
 
                         <RelativeLayout
                             android:layout_width="match_parent"

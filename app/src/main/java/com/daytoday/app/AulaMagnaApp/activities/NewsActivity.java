@@ -23,6 +23,7 @@ public class NewsActivity extends AppCompatActivity {
     TextView date;
     ImageView image;
     Button commentsButton;
+    TextView continueRead;
 
     String urlCommets;
 
@@ -35,6 +36,7 @@ public class NewsActivity extends AppCompatActivity {
         description= (TextView) findViewById(R.id.card_text_description1);
         date= (TextView) findViewById(R.id.card_text_date1);
         image= (ImageView) findViewById(R.id.card_image_view1);
+        continueRead = (TextView) findViewById(R.id.text_continue_read);
         commentsButton = (Button) findViewById(R.id.activity_news_commets_button);
 
         int id =  getIntent().getIntExtra("news_id", -1);
@@ -51,6 +53,15 @@ public class NewsActivity extends AppCompatActivity {
         title.setText(news.getTitle());
         description.setText(news.getText());
 
+        final String urlSorce = news.getUrlSorce();
+        continueRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent("android.intent.action.VIEW",Uri.parse(urlSorce));
+                startActivity(intent);
+            }
+        });
+
         urlCommets = news.getUrlComments();
 
         commentsButton.setOnClickListener(new View.OnClickListener() {
@@ -60,5 +71,7 @@ public class NewsActivity extends AppCompatActivity {
                 startActivity(viewIntent);
             }
         });
+
+
     }
 }

@@ -40,7 +40,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         cardText.setText(news.getText());
         cardDate.setText("" + news.getDate());
         try {
-            Picasso.with(itemView.getContext()).load(news.getImagen()).into(cardPhoto);
+            Picasso.with(itemView.getContext()).load(news.getImagen()).resize(400,300).centerInside().into(cardPhoto);
         }catch (Exception e){
             Log.d("LIST ERROR", "Row " + news.getId() + " doesnt have image resource");
         }
