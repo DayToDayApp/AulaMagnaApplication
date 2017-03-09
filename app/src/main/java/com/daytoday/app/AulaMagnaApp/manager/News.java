@@ -16,17 +16,20 @@ public class News extends RealmObject {
     private String text;
     private String imagen;
     private String urlComments;
+    private String urlSource;
 
     public News(){
     }
 
-    public News(String title, String text, String date, int id, String img, String urlCommets){
+    public News(String title, String text, String date, int id, String img, String urlCommets,String  urlSource){
         this.title=title;
         this.text=text;
         this.date=date;
         this.id=id;
         this.imagen=img;
         this.urlComments=urlCommets;
+        this.urlSource= urlSource;
+
     }
 
     public String getTitle() {
@@ -83,6 +86,14 @@ public class News extends RealmObject {
 
     public void setUrlComments(String urlComments) {
         this.urlComments = urlComments;
+    }
+
+    public String getUrlSource() {
+        return urlSource;
+    }
+
+    public void setUrlSource(String urlSource) {
+        this.urlSource = urlSource;
     }
 }
 

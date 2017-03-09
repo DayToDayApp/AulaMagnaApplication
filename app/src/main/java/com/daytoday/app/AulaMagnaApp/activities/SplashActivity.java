@@ -25,7 +25,6 @@ public class SplashActivity extends Activity {
 
 
                 Intent mainIntent = new Intent().setClass(SplashActivity.this, MainActivity.class);
-                overridePendingTransition(R.anim.tranlastionu_d,R.anim.translationl_r);
                 startActivity(mainIntent);
 
                 finish();

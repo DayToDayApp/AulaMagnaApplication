@@ -1,6 +1,7 @@
 package com.daytoday.app.AulaMagnaApp.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -73,8 +74,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 initializeAdapter();
-                PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).async();
-                numberOfCard = numberOfCard + 10;
+                try {
+                    PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).async();
+                    numberOfCard = numberOfCard + 10;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -122,17 +127,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.lateral_menu, menu);
         return true;
-    }
-
-    //TODO: Implement search
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_search) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -198,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String  imagen="" +newArticles.get(i).getImage();
             String title = newArticles.get(i).getTitle();
             String text = newArticles.get(i).getDescription();
+            String urlSource=""+newArticles.get(i).getSource();
             String urlCommets = newArticles.get(i).getSource().toString() + "#respond";
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US);
             dateFormat.setTimeZone(Calendar.getInstance().getTimeZone());
@@ -211,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Date date = convertDateFromUnixDate(String.valueOf(pkrssparseddate));
             String dateStr = formatDateAsDayMonthYearHourMin(date);
             List<String> listCategory = newArticles.get(i).getTags();
-            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets));
+            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets,urlSource));
         }
         initializeAdapter();
     }

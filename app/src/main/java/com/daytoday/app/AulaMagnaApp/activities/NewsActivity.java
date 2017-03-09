@@ -56,7 +56,7 @@ public class NewsActivity extends AppCompatActivity {
         title.setText(news.getTitle());
         description.setText(news.getText());
 
-        final String urlSorce = news.getUrlSorce();
+        final String urlSorce = news.getUrlSource();
         continueRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
