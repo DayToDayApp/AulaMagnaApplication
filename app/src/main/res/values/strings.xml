@@ -34,5 +34,19 @@
     <string name="activity_news_image_news_text">image news</string>
     <string name="activity_news_comments_button_text">ir a comentarios</string>
     <string name="nav_hemeroteca_text">Hemeroteca</string>
+    <string name="AboutUs">AboutUs</string>
+    <string name="linkedincrisitina">https://www.linkedin.com/in/cristinaperezmoreno/</string>
+    <string name="linkedinchema">https://www.linkedin.com/in/chema-romero/</string>
+    <string name="linkedinraul">https://www.linkedin.com/in/raulvalenciacasado/</string>
+    <string name="linkedinmarcos">https://www.linkedin.com/in/marcos-barrajon-martinez-/</string>
+    <string name="linkedindavid">https://www.linkedin.com/in/daviddelgadogil/</string>
+    <string name="linkedindaniel">https://www.linkedin.com/in/danielioniceanu/</string>
+    <string name="githubcristina">https://github.com/pemCristina</string>
+    <string name="githubchema">https://github.com/josemanuelromero93</string>
+    <string name="githubraul">https://github.com/FRValencia</string>
+    <string name="githubdavid">https://github.com/erdeivi</string>
+    <string name="githubmarcos">https://github.com/Marquetes884</string>
+    <string name="githubdaniel">https://github.com/danielioniceanu</string>
+
 
 </resources>

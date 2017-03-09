@@ -113,18 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.lateral_menu, menu);
         return true;
     }
-
-    //TODO: Implement search
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_search) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -135,12 +124,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadNewCategory(int id) {
-        if(id == R.id.nav_portada) {
+        if (id == R.id.nav_portada) {
             currentUrl = "http://www.aulamagna.com.es/feed/";
         } else if (id == R.id.nav_hemeroteca) {
             Intent intent = new Intent(MainActivity.this, HemerotecaActivity.class);
             startActivity(intent);
-        }  else {
+        } else if(id == R.id.nav_aboutus) {
+
+            Intent intent = new Intent(MainActivity.this, AboutUsDevelopers.class);
+            startActivity(intent);
+        }else{
             HashMap<Integer, String> categoryMap = new HashMap<Integer, String>() {{
                 put(R.id.nav_andalucia_almeria,"andalucia/almeria");
                 put(R.id.nav_andalucia_cordoba,"andalucia/cordoba");

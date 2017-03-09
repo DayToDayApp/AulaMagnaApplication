@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.daytoday.app.AulaMagnaApp.activities.AboutUsDevelopers">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/activity_main_toolbar_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_toolbar"
+                />
+        </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:color="@android:color/background_light">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_cris"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/cristina"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="Cristina Pérez Moreno"
+                    android:textSize="22sp"
+                    android:id="@+id/textCris"
+                    android:textAlignment="center"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/profile_image_cris"
+                    android:layout_toEndOf="@+id/profile_image_cris" />
+
+                <ImageView
+                    android:src="@drawable/linkedinlogo"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/linkedinbuttoncris"
+                    android:layout_below="@+id/textCris"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:src="@drawable/logogithub"
+                    android:layout_width="100dp"
+                    android:id="@+id/githubbutttoncris"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_below="@+id/textCris"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="32dp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:color="@android:color/background_light">
+
+                <TextView
+                    android:id="@+id/espaciovacio1"
+                    android:layout_width="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignRight="@+id/textView"
+                    android:layout_alignEnd="@+id/textView"
+                    android:layout_height="8dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_david"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/david"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="David Delgado Gil"
+                    android:textSize="22sp"
+                    android:id="@+id/textView"
+                    android:textAlignment="center"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/espaciovacio1"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/profile_image_david"
+                    android:layout_toEndOf="@+id/profile_image_david" />
+
+                <ImageView
+                    android:src="@drawable/linkedinlogo"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/linkedinbuttondavid"
+                    android:layout_below="@+id/textView"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:src="@drawable/logogithub"
+                    android:layout_width="100dp"
+                    android:id="@+id/githubbutttondavid"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="32dp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:color="@android:color/background_light">
+
+                <TextView
+                    android:id="@+id/espaciovacio2"
+                    android:layout_width="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignLeft="@+id/textMarcos"
+                    android:layout_alignStart="@+id/textMarcos"
+                    android:layout_alignRight="@+id/textMarcos"
+                    android:layout_alignEnd="@+id/textMarcos"
+                    android:layout_height="8dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_marcos"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/marcos"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="Marcos Barrajón  Martínez"
+                    android:textSize="22sp"
+                    android:id="@+id/textMarcos"
+                    android:textAlignment="center"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/espaciovacio2"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/profile_image_marcos"
+                    android:layout_toEndOf="@+id/profile_image_marcos" />
+
+                <ImageView
+                    android:src="@drawable/linkedinlogo"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/linkedinbuttonmarcos"
+                    android:layout_below="@+id/textMarcos"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:src="@drawable/logogithub"
+                    android:layout_width="100dp"
+                    android:id="@+id/githubbutttonmarcos"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_below="@+id/textMarcos"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="32dp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:color="@android:color/background_light">
+
+                <TextView
+                    android:id="@+id/espaciovacio3"
+                    android:layout_width="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignLeft="@+id/textDani"
+                    android:layout_alignStart="@+id/textDani"
+                    android:layout_alignRight="@+id/textDani"
+                    android:layout_alignEnd="@+id/textDani"
+                    android:layout_height="8dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_dani"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/danie"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="Daniel Ioniceanu"
+                    android:textSize="22sp"
+                    android:id="@+id/textDani"
+                    android:textAlignment="center"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/espaciovacio3"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/profile_image_dani"
+                    android:layout_toEndOf="@+id/profile_image_dani" />
+
+                <ImageView
+                    android:src="@drawable/linkedinlogo"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/linkedinbuttondani"
+                    android:layout_below="@+id/textDani"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:src="@drawable/logogithub"
+                    android:layout_width="100dp"
+                    android:id="@+id/githubbutttondani"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_below="@+id/textDani"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="32dp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:color="@android:color/background_light">
+
+                <TextView
+                    android:id="@+id/espaciovacio4"
+                    android:layout_width="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignLeft="@+id/textChema"
+                    android:layout_alignStart="@+id/textChema"
+                    android:layout_alignRight="@+id/textChema"
+                    android:layout_alignEnd="@+id/textChema"
+                    android:layout_height="8dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_chema"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/chema"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="José Manuel Romero González"
+                    android:textSize="22sp"
+                    android:id="@+id/textChema"
+                    android:textAlignment="center"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/espaciovacio4"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/profile_image_chema"
+                    android:layout_toEndOf="@+id/profile_image_chema" />
+
+                <ImageView
+                    android:src="@drawable/linkedinlogo"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/linkedinbuttonchema"
+                    android:layout_below="@+id/textChema"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:src="@drawable/logogithub"
+                    android:layout_width="100dp"
+                    android:id="@+id/githubbutttonchema"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_below="@+id/textChema"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="32dp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:color="@android:color/background_light">
+
+                <TextView
+                    android:id="@+id/espaciovacio"
+                    android:layout_width="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignLeft="@+id/textRaul"
+                    android:layout_alignStart="@+id/textRaul"
+                    android:layout_alignRight="@+id/textRaul"
+                    android:layout_alignEnd="@+id/textRaul"
+                    android:layout_height="8dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/raul"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:text="Fco. Raúl Valencia Casado"
+                    android:textSize="22sp"
+                    android:id="@+id/textRaul"
+                    android:textAlignment="center"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/espaciovacio"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/profile_image"
+                    android:layout_toEndOf="@+id/profile_image" />
+
+                <ImageView
+                    android:src="@drawable/linkedinlogo"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/linkedinbuttonraul"
+                    android:layout_below="@+id/textRaul"
+                    android:layout_centerHorizontal="true" />
+
+                <ImageView
+                    android:src="@drawable/logogithub"
+                    android:layout_width="100dp"
+                    android:id="@+id/githubbutttonraul"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_below="@+id/textRaul"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_height="32dp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+    </android.support.design.widget.AppBarLayout>
+</FrameLayout>
