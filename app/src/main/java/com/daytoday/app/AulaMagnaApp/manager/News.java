@@ -1,24 +1,36 @@
 package com.daytoday.app.AulaMagnaApp.manager;
 
-import android.net.Uri;
+import java.util.Date;
+import java.util.List;
 
-import java.text.SimpleDateFormat;
+import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
+import io.realm.annotations.PrimaryKey;
 
-public class News {
+public class News extends RealmObject {
+
+    @PrimaryKey private int id;
     private String title;
     private String date;
-    private String category;
+    @Ignore private List<String> listCategory;
     private String text;
+    private String imagen;
+    private String urlComments;
+    private String urlSource;
 
-    public News(String title, String date, String category) {
-        //this.photoId=photo;
-        this.title = title;
-        this.date = date;
-        this.category= category;
+    public News(){
+    }
+
+    public News(String title, String text, String date, int id, String img, String urlCommets,String  urlSource){
+        this.title=title;
+        this.text=text;
+        this.date=date;
+        this.id=id;
+        this.imagen=img;
+        this.urlComments=urlCommets;
+        this.urlSource= urlSource;
 
     }
-    private Uri photoId;
-
 
     public String getTitle() {
         return title;
@@ -28,33 +40,21 @@ public class News {
         this.title = title;
     }
 
-
-
-    public String getCategory() {
-        return category;
+    public List<String> getListCategory() {
+        return listCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setListCategory(List<String> listCategory) {
+        this.listCategory = listCategory;
     }
 
     public String getText() {
         return text;
     }
 
-
     public void setText(String text) {
         this.text = text;
     }
-
-    public News(Uri photo, String title, String  date, String category, String text) {
-        this.title = title;
-        this.date = date;
-        this.category= category;
-        this.text=text;
-        this.photoId = photo;
-    }
-
 
     public String getDate() {
         return date;
@@ -63,13 +63,38 @@ public class News {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String  getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String  imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getUrlComments() {
+        return urlComments;
+    }
+
+    public void setUrlComments(String urlComments) {
+        this.urlComments = urlComments;
+    }
+
+    public String getUrlSource() {
+        return urlSource;
+    }
+
+    public void setUrlSource(String urlSource) {
+        this.urlSource = urlSource;
+    }
 }
 
-   /* public Uri getPhotoId() {
-        return photoId;
-    }
 
-    public void setPhotoId(Uri photoId) {
-        this.photoId = photoId;
-    }
-}*/

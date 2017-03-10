@@ -1,10 +1,11 @@
-package com.daytoday.app.AulaMagnaApp;
+package com.daytoday.app.AulaMagnaApp.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import com.daytoday.app.AulaMagnaApp.MainActivity;
 import com.daytoday.app.AulaMagnaApp.R;
 
 import java.util.Timer;
@@ -12,9 +13,7 @@ import java.util.TimerTask;
 
 public class SplashActivity extends Activity {
 
-
     private static final long SPLASH_SCREEN_DELAY = 3000;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +23,9 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
-                Intent mainIntent = new Intent().setClass(
-                        SplashActivity.this, MainActivity.class);
 
+                Intent mainIntent = new Intent().setClass(SplashActivity.this, MainActivity.class);
                 startActivity(mainIntent);
-
 
                 finish();
             }
@@ -36,7 +33,5 @@ public class SplashActivity extends Activity {
 
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
-
-
     }
 }

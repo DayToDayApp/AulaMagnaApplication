@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#C41833</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#840000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="textCardColor">#000000</color>
+    <color name="textButtonColor">#FFFFFF</color>
 </resources>
