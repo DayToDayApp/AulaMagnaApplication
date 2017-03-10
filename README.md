@@ -13,10 +13,14 @@ App for Aula Magna Universitary Newspaper, Málaga
 
 ## ¿Qué hace Aula Magna Application?
 
-Aula Magna Application muestra las noticias del diario universitario Aula Magna, en una aplicación nativa para Android.
+Aula Magna Application muestra las noticias del diario universitario Aula Magna, divididas por categorías, en una aplicación nativa para Android. Además permite acceder a la Hemeroteca del diario e ir a los comentarios de las noticias.
 
 ## Screenshots
 
-A la espera de poder mostrar las imágenes para hacer las capturas finales
+![Texto alternativo](imagen4.png)
+![Texto alternativo](imagen3.png)
+![Texto alternativo](imagen2.png)
+![Texto alternativo](imagen1.png)
+![Texto alternativo](imagen5.png)
 
  
