@@ -17,6 +17,10 @@ Aula Magna Application muestra las noticias del diario universitario Aula Magna,
 
 ## Screenshots
 
-A la espera de poder mostrar las imágenes para hacer las capturas finales
+![Texto alternativo](imagen4.png)
+![Texto alternativo](imagen3.png)
+![Texto alternativo](imagen2.png)
+![Texto alternativo](imagen1.png)
+![Texto alternativo](imagen5.png)
 
  
