@@ -41,6 +41,7 @@
                             android:scaleType="centerCrop"
                             android:contentDescription="@string/activity_news_image_news_text"/>
 
+
                         <TextView
                             android:id="@+id/card_text_title1"
                             tools:text="Main title"
@@ -54,15 +55,31 @@
                             android:textSize="20sp"
                             android:padding="14dp"/>
 
-                        <TextView
-                            android:padding="14dp"
-                            android:id="@+id/card_text_description1"
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textSize="18sp"
-                            android:textColor="#000"
-                            android:textAlignment="gravity"
-                            />
+                            android:orientation="vertical">
+                                <TextView
+                                    android:id="@+id/card_text_date1"
+                                    android:layout_width="150dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:gravity="right"
+                                    android:paddingRight="5dp"
+                                    android:textColor="#000"
+                                    android:textStyle="bold"/>
+                                <TextView
+                                    android:padding="14dp"
+                                android:id="@+id/card_text_description1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="18sp"
+                                android:textColor="#000"
+                                android:textAlignment="gravity"
+                                    />
+
+                        </LinearLayout>
                         <TextView
                             android:id="@+id/text_continue_read"
                             android:layout_width="match_parent"
@@ -70,6 +87,8 @@
                             android:text="Seguir leyendo"
                             android:textColor="#012345"
                             android:gravity="center"
+                            android:textSize="20sp"
+                            android:fontFamily="cursive"
                             android:textStyle="italic"/>
 
                         <RelativeLayout
@@ -77,13 +96,6 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content">
 
-                                <TextView
-                                    android:id="@+id/card_text_date1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textStyle="bold"
-                                    tools:text="20.01.2017"
-                                    android:layout_alignParentRight="true"/>
 
                                 <TextView
                                     android:id="@+id/card_text_category1"

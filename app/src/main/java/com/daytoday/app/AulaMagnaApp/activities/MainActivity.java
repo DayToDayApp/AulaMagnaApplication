@@ -67,8 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 initializeAdapter();
-                PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).async();
+                PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).parser(new MyRss2Parser()).async();
                 numberOfCard = numberOfCard + 10;
+
             }
         });
     }
