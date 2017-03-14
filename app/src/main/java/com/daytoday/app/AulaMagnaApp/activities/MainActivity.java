@@ -59,19 +59,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = getToolbar();
         drawer(toolbar);
         navbar();
-        PkRSS.with(this).load(currentUrl).callback(this).parser(new MyRss2Parser()).async();
         initializeAdapter();
         paintToRealm();
 
         loadNewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initializeAdapter();
-                PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).parser(new MyRss2Parser()).async();
-                numberOfCard = numberOfCard + 10;
+            initializeAdapter();
+            PkRSS.with(view.getContext()).load(currentUrl).callback(MainActivity.this).parser(new MyRss2Parser()).async();
+            numberOfCard = numberOfCard + 10;
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PkRSS.with(this).load(currentUrl).callback(this).parser(new MyRss2Parser()).async();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
     private Toolbar getToolbar() {
@@ -169,9 +180,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         PkRSS.with(this).load(currentUrl).callback(this).async();
     }
-
-
-
 
     @Override
     protected void onPause() {
