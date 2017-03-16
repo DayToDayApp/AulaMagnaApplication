@@ -15,29 +15,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-       >
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/card_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.1"
-            />
-
+            android:layout_weight="1.1"/>
 
     <TextView
-    android:id="@+id/card_text_title"
-    tools:text="Main title"
-    android:textStyle="bold"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="start"
+        android:id="@+id/card_text_title"
+        tools:text="Main title"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start"
         android:layout_weight="2"
-    android:textAlignment="gravity"
-    android:textColor="@color/textCardColor"
-    android:textSize="15sp"/>
-
+        android:textAlignment="gravity"
+        android:textColor="@color/textCardColor"
+        android:textSize="15sp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -58,6 +54,7 @@
                 tools:text="Deporte"
                 android:layout_alignParentRight="true">
             </TextView>
+
             <TextView
                 android:id="@+id/card_text_description"
                 android:layout_width="0dp"
