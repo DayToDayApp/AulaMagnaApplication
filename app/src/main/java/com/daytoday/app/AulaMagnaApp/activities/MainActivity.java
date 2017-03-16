@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -236,8 +237,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String urlSource="" +newArticles.get(i).getSource();
             Date pkrssparseddate = new Date(newArticles.get(i).getDate() * 1000);
             String dateStr = formatDateAsDayMonthYearHourMin(pkrssparseddate);
-            List<String> listCategory = newArticles.get(i).getTags();
-            noticias.add(new News(title,text,dateStr,id,imagen,urlCommets,urlSource));
+            String category = newArticles.get(i).getTags().get(0);
+            noticias.add(new News(title, text, dateStr, id, imagen, urlCommets, urlSource, category));
         }
         initializeAdapter();
     }

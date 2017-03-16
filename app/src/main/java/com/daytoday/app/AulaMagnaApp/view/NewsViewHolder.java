@@ -14,11 +14,12 @@ import com.squareup.picasso.Picasso;
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
     private News news;
-    CardView cv;
-    TextView cardTitle;
-    TextView cardDate;
-    TextView cardText;
-    ImageView cardPhoto;
+    private CardView cv;
+    private TextView cardTitle;
+    private TextView cardDate;
+    private TextView cardCategory;
+    private TextView cardText;
+    private ImageView cardPhoto;
 
     public NewsViewHolder(View itemView) {
         super(itemView);
@@ -27,6 +28,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         cardPhoto= (ImageView) itemView.findViewById(R.id.card_image_view);
         cardTitle= (TextView) itemView.findViewById(R.id.card_text_title);
         cardDate= (TextView) itemView.findViewById(R.id.card_text_date);
+        cardCategory = (TextView) itemView.findViewById(R.id.card_text_category);
         cardText= (TextView) itemView.findViewById(R.id.card_text_description);
     }
 
@@ -39,6 +41,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         cardTitle.setText(news.getTitle());
         cardText.setText(news.getText());
         cardDate.setText("" + news.getDate());
+        cardCategory.setText(news.getCategory());
         try {
             Picasso.with(itemView.getContext()).load(news.getImagen()).resize(400,300).centerInside().into(cardPhoto);
         }catch (Exception e){
