@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ public class NewsActivity extends AppCompatActivity {
     TextView title;
     TextView description;
     TextView date;
+    TextView category;
     ImageView image;
     Button commentsButton;
     TextView continueRead;
@@ -37,7 +39,8 @@ public class NewsActivity extends AppCompatActivity {
 
         title= (TextView) findViewById(R.id.card_text_title1);
         description= (TextView) findViewById(R.id.card_text_description1);
-        date= (TextView) findViewById(R.id.card_text_date1);
+        date= (TextView) findViewById(R.id.activity_news_date);
+        category = (TextView) findViewById(R.id.activity_news_category);
         image= (ImageView) findViewById(R.id.card_image_view1);
         continueRead = (TextView) findViewById(R.id.text_continue_read);
         commentsButton = (Button) findViewById(R.id.activity_news_commets_button);
@@ -52,10 +55,11 @@ public class NewsActivity extends AppCompatActivity {
             news = query.findFirst();
         }
 
-        Picasso.with(this).load(news.getImagen()).into(image);
+        //Picasso.with(this).load(news.getImagen()).into(image);
         title.setText(news.getTitle());
         description.setText(news.getText());
         date.setText(news.getDate());
+        category.setText(news.getCategory());
         final String urlSorce = news.getUrlSource();
         continueRead.setOnClickListener(new View.OnClickListener() {
             @Override
